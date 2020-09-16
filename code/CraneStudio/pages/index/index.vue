@@ -8,6 +8,10 @@
 			<text class="item_link" @click="onLinkClicked" v-bind:id="item.url">{{item.title}}</text>
 		</view> -->
 
+		<view class="contact">
+
+		</view>
+
 		<view class="bottom">
 			<text class="item_link" @click="onLinkClicked" v-bind:id="links_bottom[0].url">{{links_bottom[0].title}}</text>
 			<text class="item_link"> | </text>
@@ -21,13 +25,25 @@
 		data() {
 			return {
 				title: 'Hello',
-				bottom: 'Privacy Policy | Terms of Service | Support',
 				links_bottom: [{
 					'title': 'Privacy Policy',
 					'url': 'https://cranedev123.github.io/release/privacy.html'
 				}, {
 					'title': 'Terms of Service',
+					'url': 'https://cranedev123.github.io/release/tos.html'
+				}, ],
+				contact_list: [{
+					'title': 'Weibo',
+					'icon': 'Weibo',
 					'url': 'https://cranedev123.github.io/release/privacy.html'
+				}, {
+					'title': 'Facebook',
+					'icon': 'Facebook',
+					'url': 'https://cranedev123.github.io/release/tos.html'
+				}, {
+					'title': 'Twitter',
+					'icon': 'Twitter',
+					'url': 'https://cranedev123.github.io/release/tos.html'
 				}, ]
 			}
 		},
