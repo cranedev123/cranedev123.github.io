@@ -1,12 +1,12 @@
 <template>
 	<view class="content">
-		<!-- <image class="logo" src="/static/logo.png"></image> -->
-		<view class="text-area">
-			<text class="title">{{title}}</text>
+		<view class="app_list" v-for="item in app_list">
+			<view class="app_info">
+				<image class="app_icon" @click="onLinkClicked" v-bind:id="item.link" :src="item.icon"></image>
+				<text class="app_name" @click="onLinkClicked" v-bind:id="item.link">{{item.name}}</text>
+
+			</view>
 		</view>
-		<!-- <view class="bottom" v-for="item in links_bottom">
-			<text class="item_link" @click="onLinkClicked" v-bind:id="item.url">{{item.title}}</text>
-		</view> -->
 
 		<view class="contact">
 
@@ -44,13 +44,31 @@
 					'title': 'Twitter',
 					'icon': 'Twitter',
 					'url': 'https://cranedev123.github.io/release/tos.html'
-				}, ]
+				}, ],
+				app_list: [],
+				platform:'other'
+
 			}
 		},
 		onLoad() {
+			var info = uni.getSystemInfoSync()
+			console.log(info)
+			var lan = info.language
+			this.platform = info.platform
+
+			// this.loadApps()
 
 		},
 		methods: {
+			loadApps() {
+				uni.request({
+					url: '../../static/data/apps_ios.json',
+					success: (res) => {
+						console.log(res)
+						this.app_list = res.data.appList
+					}
+				})
+			},
 			onLinkClicked(e) {
 				var url = e.currentTarget.id
 				window.location.href = url
@@ -84,6 +102,18 @@
 	.title {
 		font-size: 36rpx;
 		color: #8f8f94;
+	}
+
+	.app_info {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		text-align: left;
+	}
+
+	.app_icon {
+		width: 90upx;
+		height: 90upx;
 	}
 
 	.bottom {
