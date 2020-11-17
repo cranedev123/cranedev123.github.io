@@ -26,11 +26,11 @@
 						<view class="item_title">{{item.name}}</view>
 
 						<view class="down_load_style">
-							<image v-bind:id="index" @click="onClickItemApple" style="width: 250upx; height: 78upx;" class="down_type" src="../../static/imgs/App_store.png"
+							<image v-bind:id="index" @click.stop="onClickItemApple" style="width: 250upx; height: 78upx;" class="down_type" src="../../static/imgs/App_store.png"
 							 mode="aspectFit">
 							</image>
 							<text class="space_image"></text>
-							<image v-bind:id="index" @click="onClickItemGoogle" style="width: 250upx; height: 78upx;" class="down_type" src="../../static/imgs/googleplay.png"
+							<image v-bind:id="index" @click.stop="onClickItemGoogle" style="width: 250upx; height: 78upx;" class="down_type" src="../../static/imgs/googleplay.png"
 							 mode="aspectFit">
 							</image>
 						</view>
@@ -119,7 +119,7 @@
 		methods: {
 			onLinkClicked(e) {
 				var url = e.currentTarget.id
-				window.location.href = url
+				window.open(url)
 			},
 			getProductList() {
 				this.productList = Datas.getAppList().appList
@@ -129,18 +129,18 @@
 			onClickItem(e) {
 				var index = e.currentTarget.id
 				var url = this.productList[index].link
-				window.location.href = url
+				window.open(url)
 			},
 			onClickItemApple(e) {
 				var index = e.currentTarget.id
 				var url = this.productList[index].link
-				window.location.href = url
+				window.open(url)
 			},
 			onClickItemGoogle(e) {
 				console.log(e)
 				var index = e.currentTarget.id
 				var url = this.productList[index].link_google
-				window.location.href = url
+				window.open(url)
 			},
 		}
 	}
