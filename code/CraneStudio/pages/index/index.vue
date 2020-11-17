@@ -120,6 +120,8 @@
 		margin-top: 0%;
 		margin-left: 5%;
 		margin-right: 5%;
+		margin-bottom: 100upx;
+		padding-bottom: 100upx;
 		background-color: #FFA72B;
 	}
 
