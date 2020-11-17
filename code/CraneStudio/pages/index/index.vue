@@ -2,9 +2,7 @@
 
 	<view class="content">
 		<!-- <image class="logo" src="/static/logo.png"></image> -->
-		<!-- <view class="text-area">
-			<text class="title">{{title}}</text>
-		</view> -->
+
 		<!-- <view class="bottom" v-for="item in links_bottom">
 			<text class="item_link" @click="onLinkClicked" v-bind:id="item.url">{{item.title}}</text>
 		</view> -->
@@ -12,17 +10,30 @@
 
 		<view class="bg" />
 
+		<view :class="bg_title">
+			<text :class="title_style">{{title}}</text>
+		</view>
 
-		<uni-grid class="grid" :column="pro_colum" :showBorder="false">
+		<uni-grid class="grid_style" :column="pro_colum" :showBorder="false" borderColor="grey">
 			<view class="uni-list-cell" hover-class="uni-list-cell-hover" v-for="(item,index) in productList" v-bind:id="index"
 			 :key="index" @click="onClickItem">
-				<uni-grid-item class="item_view1" :style="'width: '+itemW+'px; height: '+itemW+'px;'">
+				<uni-grid-item class="item_view1">
 					<view class="item_view">
 						<view class="item_icon">
-							<image v-if="renderImage" class="item_icon" mode="aspectFit" src="https://p.moimg.net/project/project_20201026_1603690116_3710.jpg?imageMogr2/auto-orient/strip"></image>
-<!-- 							<image v-if="renderImage" class="item_icon" mode="aspectFit" :src="item.icon"></image> -->
+							<image v-if="renderImage" class="item_icon" mode="aspectFit" :src="item.icon"></image>
 						</view>
+
 						<view class="item_title">{{item.name}}</view>
+
+						<view class="down_load_style">
+							<image v-bind:id="index" @click="onClickItemApple" style="width: 250upx; height: 78upx;" class="down_type" src="../../static/imgs/App_store.png"
+							 mode="aspectFit">
+							</image>
+							<text class="space_image"></text>
+							<image v-bind:id="index" @click="onClickItemGoogle" style="width: 250upx; height: 78upx;" class="down_type" src="../../static/imgs/googleplay.png"
+							 mode="aspectFit">
+							</image>
+						</view>
 					</view>
 
 
@@ -30,6 +41,7 @@
 
 			</view>
 		</uni-grid>
+
 
 
 		<view class="bottom">
@@ -54,30 +66,54 @@
 			return {
 				productList: [{}],
 				renderImage: true,
-				pro_colum: 4,
-				title: 'Hello111',
+				pro_colum: 2,
+				title: 'Crane Studio',
 				platform: 'other',
-				isZh:false,
+				isZh: false,
 				links_bottom: [],
 				contact_list: [],
-				itemW: 50
+				itemW: 50,
+				bg_title: 'bg_title',
+				title_style: 'title_style',
 			}
 		},
 		onLoad() {
 			var info = uni.getSystemInfoSync()
 			this.platform = info.platform
 			this.isZh = info.language && info.language.indexOf('zh') >= 0
-			
-			if(this.platform == 'android' || this.platform == 'ios')
-			{
-				this.pro_colum = 2
-				this.itemW = info.screenWidth / 2
-			}else{
-				this.pro_colum = 5
-				this.itemW = info.screenWidth / 6
+
+			// if (this.platform == 'android' || this.platform == 'ios') {
+			// 	this.pro_colum = 2
+			// 	this.itemW = info.screenWidth / 2
+			// } else {
+			// 	this.pro_colum = 5
+			// 	this.itemW = info.screenWidth / 6
+			// }
+
+			var isMobile = this.platform == 'android' || this.platform == 'ios'
+
+			if (isMobile) {
+				this.bg_title = 'bg_title_small'
+				this.title_style = 'title_style_small'
+
+				this.pro_colum = 1
+				this.itemW = (info.screenWidth * 3 / 5 - 20) / 3
+			} else {
+				this.bg_title = 'bg_title'
+				this.title_style = 'title_style'
+
+				this.pro_colum = 4
+				this.itemW = (info.screenWidth * 3 / 5 - 20) / 6
+
 			}
+
+
+			// this.pro_colum = 4
+			// this.itemW = (info.screenWidth * 3 / 5 - 20) / 6
+
+			// this.itemW = 100
 			console.log(info)
-			
+
 			this.getProductList()
 		},
 		methods: {
@@ -95,6 +131,17 @@
 				var url = this.productList[index].link
 				window.location.href = url
 			},
+			onClickItemApple(e) {
+				var index = e.currentTarget.id
+				var url = this.productList[index].link
+				window.location.href = url
+			},
+			onClickItemGoogle(e) {
+				console.log(e)
+				var index = e.currentTarget.id
+				var url = this.productList[index].link_google
+				window.location.href = url
+			},
 		}
 	}
 </script>
@@ -108,6 +155,38 @@
 		background-color: #2C405A;
 	}
 
+	.bg_title {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		align-content: center;
+		justify-content: center;
+		position: fixed;
+		top: 150upx;
+	}
+
+	.bg_title_small {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		align-content: center;
+		justify-content: center;
+		position: fixed;
+		top: 20upx;
+	}
+
+	.title_style {
+		color: #FFFFFF;
+		font-size: 120upx;
+		font-style: normal;
+	}
+
+	.title_style_small {
+		color: #FFFFFF;
+		font-size: 40upx;
+		font-style: normal;
+	}
+
 	.bg {
 		position: fixed;
 		width: 100%;
@@ -115,13 +194,12 @@
 		background-color: #2C405A;
 	}
 
-	.grid {
+	.grid_style {
 
-		margin-top: 0%;
-		margin-left: 5%;
-		margin-right: 5%;
-		margin-bottom: 100upx;
-		padding-bottom: 100upx;
+		width: 60%;
+		margin-top: 350upx;
+		margin-left: 20%;
+		margin-right: 20%;
 		background-color: #FFA72B;
 	}
 
@@ -132,19 +210,48 @@
 
 	.item_view {
 		display: flex;
-		width: 100%;
+		margin-left: 15%;
+		margin-right: 15%;
+		margin-top: 15%;
+		margin-bottom: 15%;
+		width: 70%;
 		height: 100%;
 		flex-direction: column;
 		align-items: center;
+		align-content: center;
+		justify-content: center;
 	}
 
 	.item_icon {
 		width: 100%;
 		height: 100%;
+
+		border-radius: 17%;
+
 	}
 
 	.item_title {
 		color: #FFFFFF;
+		margin-top: 20upx;
+	}
+
+	.down_load_style {
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		margin-top: 30upx;
+	}
+
+	.down_type {
+		/* width: 90%;
+		margin-left: 5%;
+		margin-right: 5%; */
+	}
+
+	.space_image {
+		width: 30upx;
 	}
 
 	.logo {
