@@ -50,8 +50,12 @@
 				<text class="item_link"> | </text>
 				<text class="item_link" @click="onLinkClicked" v-bind:id="links_bottom[1].url">{{links_bottom[1].title}}</text>
 			</view>
-			<view class="contact">
-			</view>
+			<list class="contact" ref="list">
+				<cell v-for="(item, index) in contact_list" v-bind:id="index" @click="onContactCLicked">
+					<!-- <text>{{item.title}}</text> -->
+					<image class="contact_img" :src="item.icon" mode="aspectFit"></image>
+				</cell>
+			</list>
 			<view class="copyright">Copyright © 2018-2020 CraneStudio, Inc. All rights reserved.</view>
 		</view>
 
@@ -119,7 +123,7 @@
 		methods: {
 			onLinkClicked(e) {
 				var url = e.currentTarget.id
-				window.open(url)
+				this.jumpUrl(url)
 			},
 			getProductList() {
 				this.productList = Datas.getAppList().appList
@@ -129,19 +133,31 @@
 			onClickItem(e) {
 				var index = e.currentTarget.id
 				var url = this.productList[index].link
-				window.open(url)
+				this.jumpUrl(url)
 			},
 			onClickItemApple(e) {
 				var index = e.currentTarget.id
 				var url = this.productList[index].link
-				window.open(url)
+				this.jumpUrl(url)
 			},
 			onClickItemGoogle(e) {
 				console.log(e)
 				var index = e.currentTarget.id
 				var url = this.productList[index].link_google
-				window.open(url)
+				this.jumpUrl(url)
 			},
+			onContactCLicked(e) {
+				console.log(e)
+				var index = e.currentTarget.id
+				var url = this.contact_list[index].url
+				this.jumpUrl(url)
+			},
+
+			jumpUrl(url) {
+				if (url && url.length > 0) {
+					window.open(url)
+				}
+			}
 		}
 	}
 </script>
@@ -282,6 +298,19 @@
 		bottom: 50upx;
 		left: 0;
 		right: 0;
+	}
+
+	.contact {
+		display: flex;
+		flex-direction: row;
+	}
+	
+	.contact_img{
+		width: 50upx;
+		height: 50upx;
+		margin-left: 10upx;
+		margin-right: 10upx;
+		margin-top: 20upx;
 	}
 
 	.item_link {

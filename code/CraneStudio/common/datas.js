@@ -37,14 +37,16 @@ var appList = {
 			"package": "cn.crane.game.flappyufo",
 			"icon": "https://is3-ssl.mzstatic.com/image/thumb/Purple113/v4/6d/6b/0c/6d6b0cb3-c4f3-5f3c-d1fd-0ac9dcda0748/AppIcon-0-1x_U007emarketing-0-0-85-220-7.png/230x0w.jpg",
 			"link": "https://apps.apple.com/cn/app/id1482524329",
-			"link_google": "https://apps.apple.com/cn/app/id1482524329"},
+			"link_google": "https://apps.apple.com/cn/app/id1482524329"
+		},
 		{
 			"name": "Conway's Game of Life",
 			"name_zh": "Conway's Game of Life",
 			"package": "cn.crane.game.flutter.lifegame",
 			"icon": "https://play-lh.googleusercontent.com/tvoRwJ_hAQkYgIb0zYX-_fIOY16ej1QGdE1X2_fizVZqtBbzzLoZE9ZxHHbQ4r5HXA=s360-rw",
 			"link": "https://apps.apple.com/cn/app/id1489188975",
-			"link_google": "https://play.google.com/store/apps/details?id=cn.crane.game.flutter.lifegame"},
+			"link_google": "https://play.google.com/store/apps/details?id=cn.crane.game.flutter.lifegame"
+		},
 		{
 			"name": "Langton's Ant - cell Games",
 			"name_zh": "Langton's Ant - cell Games",
@@ -52,22 +54,38 @@ var appList = {
 			"icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple123/v4/ca/ae/11/caae11ff-7c40-3b9c-5991-6349203a670d/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-85-220.png/230x0w.webp",
 			"link": "https://apps.apple.com/cn/app/id1491344162",
 			"link_google": "https://apps.apple.com/cn/app/id1491344162"
+		},
+		{
+			"name": "The Next One",
+			"name_zh": "The Next One",
+			"package": "",
+			"icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple123/v4/ca/ae/11/caae11ff-7c40-3b9c-5991-6349203a670d/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-85-220.png/230x0w.webp",
+			"link": "",
+			"link_google": ""
 		}
 	]
 };
 
 var contact_list = [{
-	'title': 'Weibo',
-	'icon': 'Weibo',
-	'url': 'https://cranedev123.github.io/release/privacy.html'
-}, {
 	'title': 'Facebook',
-	'icon': 'Facebook',
+	'icon': '../../static/imgs/facebook-one.svg',
 	'url': 'https://cranedev123.github.io/release/tos.html'
 }, {
 	'title': 'Twitter',
-	'icon': 'Twitter',
+	'icon': '../../static/imgs/twitter.svg',
 	'url': 'https://cranedev123.github.io/release/tos.html'
+}, {
+	'title': 'Instagram',
+	'icon': '../../static/imgs/instagram.svg',
+	'url': 'https://cranedev123.github.io/release/tos.html'
+}, {
+	'title': 'Weibo',
+	'icon': '../../static/imgs/weibo.svg',
+	'url': 'https://cranedev123.github.io/release/privacy.html'
+}, {
+	'title': 'Email',
+	'icon': '../../static/imgs/mail.svg',
+	'url': 'https://cranedev123.github.io/release/privacy.html'
 }, ];
 
 
