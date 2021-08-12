@@ -1,7 +1,8 @@
+import 'package:crane_studio_flutter/ui/base/V.dart';
 import 'package:crane_studio_flutter/ui/color/MyColors.dart';
 import 'package:crane_studio_flutter/ui/page/IndexPage.dart';
+import 'package:crane_studio_flutter/utils/JumpUtils.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +16,7 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   TabController? _tabController;
   PageController _pageController = PageController();
-  List<String> titles = ["首页", "项目", "我的"];
+  List<String> titles = ["首页", "项目", "联系我们"];
 
   @override
   void initState() {
@@ -32,9 +33,9 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.white,
+      backgroundColor: MyColors.bg,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: MyColors.bg,
         elevation: 1,
         leadingWidth: 300000,
         brightness: Brightness.dark,
@@ -57,10 +58,10 @@ class _HomePageState extends State<HomePage>
                 indicatorColor: Colors.transparent,
                 indicatorWeight: 5.0,
                 controller: _tabController,
-                labelColor: MyColors.txt_black,
+                labelColor: MyColors.white,
                 unselectedLabelColor: MyColors.txt_grey,
                 labelStyle: TextStyle(
-                    color: MyColors.txt_black,
+                    color: MyColors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 20),
                 unselectedLabelStyle: TextStyle(
@@ -79,49 +80,6 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       // 底部
-//       bottomNavigationBar: Material(
-//         color: Colors.white,
-//         child: TabBar(
-//           tabs: <Tab>[
-//             Tab(
-//               text: titles[0],
-//             ),
-//             Tab(
-//               text: titles[1],
-//             ),
-//             Tab(
-//               text: titles[2],
-//             ),
-//           ],
-//           indicatorColor: Colors.blue,
-//           indicatorWeight: 5.0,
-//           controller: _tabController,
-//           labelColor: Colors.red,
-//           unselectedLabelColor: Colors.grey,
-//           onTap: (index) {
-//             _pageController.jumpToPage(index);
-//           },
-//         ),
-//       ),
-//       body: PageView(
-//         controller: _pageController,
-//         children: <Widget>[
-//           Text(titles[0]),
-//           Text(titles[1]),
-//           Text(titles[2])
-// //          TopPageViewDemo(),
-//         ],
-//         onPageChanged: (index) {
-//           _tabController?.animateTo(index);
-//         },
-//       ),
-//     );
-//   }
-
   Widget _buildContent() {
     double headerH = 70;
     return Stack(
@@ -139,6 +97,30 @@ class _HomePageState extends State<HomePage>
             _tabController?.animateTo(index);
           },
         ),
+        Positioned(
+            bottom: 30,
+            left: 0,
+            right: 0,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _buildTos('Privacy Policy',
+                        'https://cranedev123.github.io/release/privacy.html'),
+                    SizedBox(width: 5),
+                    V.buildText('|', color: MyColors.white),
+                    SizedBox(width: 5),
+                    _buildTos('Terms of Service',
+                        'https://cranedev123.github.io/release/tos.html')
+                  ],
+                ),
+                SizedBox(height: 15),
+                V.buildText(
+                    'Copyright © 2018-2021 CraneStudio, Inc. All rights reserved.',
+                    color: MyColors.txt_grey),
+              ],
+            ))
         // TabBar(
         //   tabs: <Tab>[
         //     Tab(
@@ -162,6 +144,15 @@ class _HomePageState extends State<HomePage>
         //   },
         // )
       ],
+    );
+  }
+
+  Widget _buildTos(String txt, String link) {
+    return GestureDetector(
+      onTap: () {
+        JumpUtils.openUrl(link);
+      },
+      child: V.buildText(txt, color: MyColors.white),
     );
   }
 }

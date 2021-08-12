@@ -211,10 +211,13 @@ class V {
   /// ImageVIew from url
   static Widget buildNetImageView(String imageUrl, double w,
       {String placeholder = R.app_store,
-        double aspectRatio = 1 / 1,
-        double radius = 0}) {
+      double aspectRatio = 1 / 1,
+      double radius = 0}) {
     return Container(
       width: w,
+      // decoration: BoxDecoration(
+      //     border: Border.all(color: MyColors.text_hint, width: 1.0),
+      //     borderRadius: BorderRadius.circular(18)),
       child: AspectRatio(
           aspectRatio: aspectRatio,
           child: ClipRRect(
@@ -226,6 +229,22 @@ class V {
                 fit: BoxFit.cover,
               ))),
     );
+  }
+
+  static Widget buildLogoView({double w = 100}) {
+    return Container(
+        height: w,
+        width: w,
+        padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+        decoration: BoxDecoration(
+            border: Border.all(color: MyColors.text_hint, width: 1.0),
+            borderRadius: BorderRadius.circular(18)),
+        child: Image.asset(
+          R.app_store,
+          height: w,
+          width: w,
+          fit: BoxFit.cover,
+        ));
   }
 
   // /// ImageButton
@@ -610,22 +629,6 @@ class V {
     return Divider(
       color: MyColors.divider,
     );
-  }
-
-  static Widget buildLogoView() {
-    return Container(
-        height: 100,
-        width: 100,
-        padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-        decoration: BoxDecoration(
-            border: Border.all(color: MyColors.text_hint, width: 1.0),
-            borderRadius: BorderRadius.circular(18)),
-        child: Image.asset(
-          R.app_store,
-          height: 100,
-          width: 100,
-          fit: BoxFit.cover,
-        ));
   }
 
   static Widget buildLargeAView(
