@@ -72,7 +72,11 @@
     "mp-toutiao" : {
         "usingComponents" : true
     },
-    "uniStatistics": {  
-        "enable": false
+    "uniStatistics" : {
+        "enable" : false
+    },
+    "h5" : {
+        "title" : "CraneStudio",
+        "domain" : "cranedev123.github.io"
     }
 }
