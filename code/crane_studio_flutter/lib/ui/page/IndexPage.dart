@@ -21,6 +21,11 @@ class _IndexPageState extends State<IndexPage> {
 
   int spanCount = 4;
 
+  double padding = 20;
+
+  double sW = 320;
+  double itemW = 200;
+
   @override
   void initState() {
     super.initState();
@@ -29,6 +34,13 @@ class _IndexPageState extends State<IndexPage> {
 
   @override
   Widget build(BuildContext context) {
+    sW = MediaQuery.of(context).size.width;
+
+    if (sW < 300) {
+      itemW = sW;
+    }
+
+    spanCount = (sW / itemW).floor();
     return Container(
       child: ListView.builder(
         padding: EdgeInsets.fromLTRB(80, 100, 80, 40),
@@ -39,8 +51,6 @@ class _IndexPageState extends State<IndexPage> {
   }
 
   Widget _itemBuilder(BuildContext context, int index) {
-    double padding = 20;
-
     List<Widget> _arrWidgets = [];
     for (int i = 0; i < spanCount; i++) {
       if (i > 0) {
@@ -60,8 +70,8 @@ class _IndexPageState extends State<IndexPage> {
   }
 
   Widget _buildProItem(AppItem? item) {
-    double w = 200;
-    double h = 300;
+    double w = itemW;
+    double h = itemW * 1.5;
     if (item != null) {
       Widget _itemView = Container(
         padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
@@ -93,11 +103,9 @@ class _IndexPageState extends State<IndexPage> {
     return SizedBox(width: w, height: h);
   }
 
-  void _loadData() {
-    ConfigUtils.loadAppListFromAssets(context).then((list) {
-      setState(() {
-        appList = list;
-      });
-    });
+  void _loadData() async {
+    appList = await ConfigUtils.loadAppListFromAssets(context);
+    print(appList);
+    setState(() {});
   }
 }

@@ -74,6 +74,7 @@ class ConfigUtils {
 
       return AppListEntity.fromJson(response).appList;
     } catch (e) {
+      print(e);
       return [];
     }
   }

@@ -6,9 +6,9 @@ class PlatformUtils {
   }
 
   static bool isAndroid() {
-    try {
-      return Platform.isAndroid;
-    } catch (e) {}
+    // try {
+    //   return Platform.isAndroid;
+    // } catch (e) {}
     return false;
   }
 

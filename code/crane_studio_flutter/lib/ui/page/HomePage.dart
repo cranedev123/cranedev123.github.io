@@ -5,6 +5,8 @@ import 'package:crane_studio_flutter/utils/JumpUtils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'ContactUsPage.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -17,6 +19,8 @@ class _HomePageState extends State<HomePage>
   TabController? _tabController;
   PageController _pageController = PageController();
   List<String> titles = ["首页", "项目", "联系我们"];
+
+  double sW = 320;
 
   @override
   void initState() {
@@ -32,51 +36,56 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    sW = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: MyColors.bg,
       appBar: AppBar(
         backgroundColor: MyColors.bg,
         elevation: 1,
-        leadingWidth: 300000,
+        // leadingWidth: sW,
         brightness: Brightness.dark,
-        leading: Container(
-          padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
-          child: Wrap(
-            children: [
-              TabBar(
-                tabs: <Tab>[
-                  Tab(
-                    text: titles[0],
-                  ),
-                  Tab(
-                    text: titles[1],
-                  ),
-                  Tab(
-                    text: titles[2],
-                  ),
-                ],
-                indicatorColor: Colors.transparent,
-                indicatorWeight: 5.0,
-                controller: _tabController,
-                labelColor: MyColors.white,
-                unselectedLabelColor: MyColors.txt_grey,
-                labelStyle: TextStyle(
-                    color: MyColors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
-                unselectedLabelStyle: TextStyle(
-                    color: MyColors.txt_grey,
-                    fontWeight: FontWeight.normal,
-                    fontSize: 18),
-                onTap: (index) {
-                  _pageController.jumpToPage(index);
-                },
-              )
-            ],
-          ),
-        ),
+        // title: _buildTopBar(),
       ),
       body: _buildContent(),
+    );
+  }
+
+  Widget _buildTopBar() {
+    return Container(
+      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+      child: Wrap(
+        children: [
+          TabBar(
+            tabs: <Tab>[
+              Tab(
+                text: titles[0],
+              ),
+              Tab(
+                text: titles[1],
+              ),
+              Tab(
+                text: titles[2],
+              ),
+            ],
+            indicatorColor: Colors.transparent,
+            indicatorWeight: 5.0,
+            controller: _tabController,
+            labelColor: MyColors.white,
+            unselectedLabelColor: MyColors.txt_grey,
+            labelStyle: TextStyle(
+                color: MyColors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20),
+            unselectedLabelStyle: TextStyle(
+                color: MyColors.txt_grey,
+                fontWeight: FontWeight.normal,
+                fontSize: 18),
+            onTap: (index) {
+              _pageController.jumpToPage(index);
+            },
+          )
+        ],
+      ),
     );
   }
 
@@ -90,13 +99,14 @@ class _HomePageState extends State<HomePage>
             IndexPage(),
             // Text(titles[1]),
             Text(titles[1]),
-            Text(titles[2])
+            ContactUsPage()
 //          TopPageViewDemo(),
           ],
           onPageChanged: (index) {
             _tabController?.animateTo(index);
           },
         ),
+        _buildTopBar(),
         Positioned(
             bottom: 30,
             left: 0,
