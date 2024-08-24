@@ -1,5 +1,6 @@
 {
-	"appList": [{
+	"appList": [
+		{
 			"name": "Railway Worker",
 			"name_zh": "Railway Worker",
 			"package": "cn.crane.flutter.plumber.lineworker",

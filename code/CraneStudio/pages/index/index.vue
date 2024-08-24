@@ -56,7 +56,7 @@
 					<image class="contact_img" :src="item.icon" mode="aspectFit"></image>
 				</cell>
 			</list>
-			<view class="copyright">Copyright © 2018-2020 CraneStudio, Inc. All rights reserved.</view>
+			<view class="copyright">Copyright © 2018-2024 CraneStudio, Inc. All rights reserved.</view>
 		</view>
 
 
@@ -106,8 +106,8 @@
 				this.bg_title = 'bg_title'
 				this.title_style = 'title_style'
 
-				this.pro_colum = 4
-				this.itemW = (info.screenWidth * 3 / 5 - 20) / 6
+				this.pro_colum = 6
+				this.itemW = (info.screenWidth * 0.7 - 20) / 6
 
 			}
 
@@ -127,7 +127,7 @@
 			},
 			getProductList() {
 				this.productList = Datas.getAppList().appList
-				this.contact_list = Datas.getContactList()
+				// this.contact_list = Datas.getContactList()
 				this.links_bottom = Datas.getLinks_bottom()
 			},
 			onClickItem(e) {
@@ -178,7 +178,9 @@
 		align-content: center;
 		justify-content: center;
 		position: fixed;
-		top: 150upx;
+		top: 100upx;
+		background-color: #2C405A;
+		z-index: 1;
 	}
 
 	.bg_title_small {
@@ -187,8 +189,10 @@
 		align-items: center;
 		align-content: center;
 		justify-content: center;
+		background-color: #2C405A;
 		position: fixed;
-		top: 20upx;
+		top: 60upx;
+		z-index: 1;
 	}
 
 	.title_style {
@@ -212,8 +216,8 @@
 
 	.grid_style {
 
-		width: 60%;
-		margin-top: 350upx;
+		width: 70%;
+		margin-top: 300upx;
 		margin-left: 20%;
 		margin-right: 20%;
 		background-color: #FFA72B;
@@ -223,7 +227,7 @@
 		color: #FFFFFF;
 		background-color: #ffa72b;
 	}
-
+	
 	.item_view {
 		display: flex;
 		margin-left: 15%;
@@ -239,16 +243,17 @@
 	}
 
 	.item_icon {
-		width: 100%;
-		height: 100%;
-
-		border-radius: 17%;
-
+		
+		  width: 200upx;
+		  height: 200upx; 
+		  border-radius: 17%; 
 	}
 
 	.item_title {
 		color: #FFFFFF;
 		margin-top: 20upx;
+		  white-space: nowrap;
+		   text-overflow: ellipsis;
 	}
 
 	.down_load_style {
@@ -298,6 +303,8 @@
 		bottom: 50upx;
 		left: 0;
 		right: 0;
+		background-color: #2C405A;
+		z-index: 1;
 	}
 
 	.contact {
