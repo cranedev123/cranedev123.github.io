@@ -504,6 +504,115 @@
                 container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-secondary);">游戏列表加载失败</p>';
             }
         }
+
+        // 二维码弹窗相关元素
+        const qrPopup = document.getElementById('qr-popup');
+        const qrCode = document.getElementById('qr-code');
+        const qrGameName = document.getElementById('qr-game-name');
+        const qrArrow = document.getElementById('qr-arrow');
+        const qrClose = document.getElementById('qr-close');
+        const overlay = document.getElementById('overlay');
+
+        // 显示二维码弹窗
+        function showQRCodePopup(url, gameName, event) {
+            // 清空之前的二维码
+            qrCode.innerHTML = '';
+
+            // 生成二维码
+            QRCode.toCanvas(url, { width: 144, margin: 0 }, function(error, canvas) {
+                if (error) {
+                    console.error(error);
+                    return;
+                }
+                qrCode.appendChild(canvas);
+            });
+
+            // 设置游戏名称
+            qrGameName.textContent = gameName;
+
+            // 计算弹窗位置
+            const rect = event.target.getBoundingClientRect();
+            const popupWidth = 240;
+            const popupHeight = 280;
+
+            let left = rect.left + rect.width / 2 - popupWidth / 2;
+            let top = rect.bottom + 20;
+            let arrowUp = false;
+
+            // 检查是否超出右边界
+            if (left + popupWidth > window.innerWidth - 20) {
+                left = window.innerWidth - popupWidth - 20;
+            }
+
+            // 检查是否超出左边界
+            if (left < 20) {
+                left = 20;
+            }
+
+            // 检查是否超出下边界
+            if (top + popupHeight > window.innerHeight - 20) {
+                top = rect.top - popupHeight - 20;
+                arrowUp = true;
+            }
+
+            // 设置箭头方向
+            if (arrowUp) {
+                qrArrow.classList.add('arrow-up');
+            } else {
+                qrArrow.classList.remove('arrow-up');
+            }
+
+            // 设置弹窗位置
+            qrPopup.style.left = `${left}px`;
+            qrPopup.style.top = `${top}px`;
+
+            // 显示弹窗和遮罩
+            qrPopup.classList.add('active');
+            overlay.classList.add('active');
+        }
+
+        // 隐藏二维码弹窗
+        function hideQRCodePopup() {
+            qrPopup.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        // 绑定关闭弹窗事件
+        qrClose.addEventListener('click', hideQRCodePopup);
+        overlay.addEventListener('click', hideQRCodePopup);
+
+        // 处理游戏卡片点击事件（事件委托）
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('btn-detail')) {
+                const link = event.target.dataset.link;
+                const name = event.target.dataset.name;
+                const platform = event.target.dataset.platform;
+
+                if (platform === 'ios') {
+                    if (isMobile()) {
+                        // 手机端直接跳转
+                        window.location.href = link;
+                    } else {
+                        // PC端显示二维码弹窗
+                        event.preventDefault();
+                        showQRCodePopup(link, name, event);
+                    }
+                } else {
+                    // Android 所有端直接跳转
+                    window.location.href = link;
+                }
+            }
+        });
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 更新版权年份
+            updateCopyright();
+
+            // 加载游戏列表
+            loadGames('static/more_apps_ios.json', 'ios-games-grid', 'ios');
+            loadGames('static/more_apps_android.json', 'android-games-grid', 'android');
+        });
     </script>
 
     <!-- QR Code Popup -->
