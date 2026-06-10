@@ -69,10 +69,71 @@
                 padding: 12px;
             }
         }
+
+        /* Hero 区域 */
+        .hero {
+            background-color: var(--hero-bg);
+            border-radius: var(--radius-lg);
+            margin-bottom: 32px;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: var(--shadow-card);
+        }
+
+        .hero-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hero-logo {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 16px;
+                margin-bottom: 20px;
+                border-radius: var(--radius-md);
+            }
+
+            .hero-logo {
+                font-size: 36px;
+            }
+
+            .hero-title {
+                font-size: 24px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- HTML 内容将在后续步骤添加 -->
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-logo">🎮 CraneStudio</div>
+                <h1 class="hero-title">用心打造每一款休闲游戏</h1>
+                <p class="hero-subtitle">让快乐触手可及</p>
+            </div>
+        </div>
+    </header>
     <script>
         // JavaScript 代码将在后续步骤添加
     </script>
