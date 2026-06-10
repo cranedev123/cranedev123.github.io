@@ -309,6 +309,106 @@
                 font-size: 12px;
             }
         }
+
+        /* 遮罩层 */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            z-index: 998;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* 二维码弹窗 */
+        .qr-popup {
+            position: fixed;
+            z-index: 999;
+            display: none;
+            pointer-events: none;
+        }
+
+        .qr-popup.active {
+            display: block;
+            pointer-events: auto;
+        }
+
+        .qr-popup-content {
+            background-color: var(--card-bg);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            box-shadow: var(--shadow-popup);
+            width: 240px;
+            text-align: center;
+            position: relative;
+        }
+
+        .qr-close {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 4px;
+            line-height: 1;
+        }
+
+        .qr-close:hover {
+            color: var(--text-primary);
+        }
+
+        .qr-code {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 16px;
+            background-color: white;
+            padding: 8px;
+        }
+
+        .qr-code canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .qr-game-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .qr-hint {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .qr-arrow {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid var(--card-bg);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: -10px;
+        }
+
+        .qr-arrow.arrow-up {
+            border-top: none;
+            border-bottom: 10px solid var(--card-bg);
+            top: auto;
+            bottom: -10px;
+        }
     </style>
 </head>
 <body>
@@ -366,5 +466,19 @@
     <script>
         // JavaScript 代码将在后续步骤添加
     </script>
+
+    <!-- QR Code Popup -->
+    <div class="qr-popup" id="qr-popup">
+        <div class="qr-popup-content">
+            <button class="qr-close" id="qr-close">&times;</button>
+            <div class="qr-code" id="qr-code"></div>
+            <p class="qr-game-name" id="qr-game-name"></p>
+            <p class="qr-hint">请用手机扫码前往 App Store</p>
+        </div>
+        <div class="qr-arrow" id="qr-arrow"></div>
+    </div>
+
+    <!-- Overlay for closing popup -->
+    <div class="overlay" id="overlay"></div>
 </body>
 </html>
