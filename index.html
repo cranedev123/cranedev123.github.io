@@ -476,6 +476,20 @@
         </div>
     </footer>
 
+    <!-- QR Code Popup -->
+    <div class="qr-popup" id="qr-popup">
+        <div class="qr-popup-content">
+            <button class="qr-close" id="qr-close">&times;</button>
+            <div class="qr-code" id="qr-code"></div>
+            <p class="qr-game-name" id="qr-game-name"></p>
+            <p class="qr-hint">请用手机扫码前往 App Store</p>
+        </div>
+        <div class="qr-arrow" id="qr-arrow"></div>
+    </div>
+
+    <!-- Overlay for closing popup -->
+    <div class="overlay" id="overlay"></div>
+
     <script>
         // 判断是否为移动设备
         function isMobile() {
@@ -643,19 +657,5 @@
             }, true);
         });
     </script>
-
-    <!-- QR Code Popup -->
-    <div class="qr-popup" id="qr-popup">
-        <div class="qr-popup-content">
-            <button class="qr-close" id="qr-close">&times;</button>
-            <div class="qr-code" id="qr-code"></div>
-            <p class="qr-game-name" id="qr-game-name"></p>
-            <p class="qr-hint">请用手机扫码前往 App Store</p>
-        </div>
-        <div class="qr-arrow" id="qr-arrow"></div>
-    </div>
-
-    <!-- Overlay for closing popup -->
-    <div class="overlay" id="overlay"></div>
 </body>
 </html>
