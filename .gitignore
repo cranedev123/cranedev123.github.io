@@ -1,0 +1,88 @@
+# IDE and Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# HBuilderX / Uni-app build output
+unpackage/
+code/CraneStudio/unpackage/
+
+# Flutter build output
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+code/crane_studio_flutter/build/
+code/crane_studio_flutter/.dart_tool/
+
+# iOS build output
+*.ipa
+*.dSYM.zip
+*.dSYM
+code/crane_studio_flutter/ios/Pods/
+code/crane_studio_flutter/ios/.symlinks/
+code/crane_studio_flutter/ios/Flutter/Flutter.framework
+code/crane_studio_flutter/ios/Flutter/Flutter.podspec
+code/crane_studio_flutter/ios/Flutter/App.framework
+code/crane_studio_flutter/ios/Flutter/Engine.xcframework
+
+# Android build output
+*.apk
+*.ap_
+*.aab
+code/crane_studio_flutter/android/.gradle/
+code/crane_studio_flutter/android/captures/
+code/crane_studio_flutter/android/gradlew
+code/crane_studio_flutter/android/gradlew.bat
+code/crane_studio_flutter/android/local.properties
+code/crane_studio_flutter/android/**/GeneratedPluginRegistrant.java
+code/crane_studio_flutter/android/.externalNativeBuild/
+code/crane_studio_flutter/android/app/google-services.json
+
+# Web build output
+code/crane_studio_flutter/web/favicon.png
+web/
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+*.db
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets/
+
+# Node modules (if any)
+node_modules/
+
+# Superpowers generated files
+.superpowers/
+
+# Claude Code cache
+.claude/
