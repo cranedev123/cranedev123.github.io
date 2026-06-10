@@ -464,7 +464,46 @@
     </footer>
 
     <script>
-        // JavaScript 代码将在后续步骤添加
+        // 判断是否为移动设备
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        }
+
+        // 获取当前年份并更新版权信息
+        function updateCopyright() {
+            const year = new Date().getFullYear();
+            document.getElementById('copyright').textContent = `© 2018-${year} CraneStudio`;
+        }
+
+        // 创建游戏卡片 HTML
+        function createGameCard(game, platform) {
+            const card = document.createElement('div');
+            card.className = 'game-card';
+            card.innerHTML = `
+                <img class="game-icon" src="${game.icon}" alt="${game.name}" loading="lazy">
+                <p class="game-name">${game.name}</p>
+                <button class="btn-detail" data-link="${game.link}" data-name="${game.name}" data-platform="${platform}">
+                    查看详情 →
+                </button>
+            `;
+            return card;
+        }
+
+        // 加载并渲染游戏列表
+        async function loadGames(jsonUrl, containerId, platform) {
+            const container = document.getElementById(containerId);
+            try {
+                const response = await fetch(jsonUrl);
+                const data = await response.json();
+                data.appList.forEach(game => {
+                    const card = createGameCard(game, platform);
+                    container.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Failed to load games:', error);
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-secondary);">游戏列表加载失败</p>';
+            }
+        }
     </script>
 
     <!-- QR Code Popup -->
