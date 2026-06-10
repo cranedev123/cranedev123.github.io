@@ -259,6 +259,56 @@
                 font-size: 12px;
             }
         }
+
+        /* 底部 */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .footer-divider {
+            height: 1px;
+            background-color: var(--border-color);
+            margin-bottom: 24px;
+        }
+
+        .copyright {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .separator {
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                padding: 24px 16px;
+            }
+
+            .copyright,
+            .footer-links a {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -301,6 +351,17 @@
             </div>
         </section>
     </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-divider"></div>
+        <p class="copyright" id="copyright"></p>
+        <div class="footer-links">
+            <a href="release/privacy.html">隐私政策</a>
+            <span class="separator">·</span>
+            <a href="release/tos.html">服务条款</a>
+        </div>
+    </footer>
 
     <script>
         // JavaScript 代码将在后续步骤添加
