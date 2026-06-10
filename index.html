@@ -409,6 +409,19 @@
             top: auto;
             bottom: -10px;
         }
+
+        /* 加载状态 */
+        .games-grid.loading {
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-text {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -489,19 +502,28 @@
             return card;
         }
 
-        // 加载并渲染游戏列表
+        // 加载并渲染游戏列表（优化版）
         async function loadGames(jsonUrl, containerId, platform) {
             const container = document.getElementById(containerId);
+            container.innerHTML = '<p class="loading-text">加载中...</p>';
+            container.classList.add('loading');
+
             try {
                 const response = await fetch(jsonUrl);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
                 const data = await response.json();
+                container.innerHTML = '';
+                container.classList.remove('loading');
                 data.appList.forEach(game => {
                     const card = createGameCard(game, platform);
                     container.appendChild(card);
                 });
             } catch (error) {
                 console.error('Failed to load games:', error);
-                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-secondary);">游戏列表加载失败</p>';
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-secondary);">游戏列表加载失败，请刷新页面重试</p>';
+                container.classList.remove('loading');
             }
         }
 
@@ -612,6 +634,13 @@
             // 加载游戏列表
             loadGames('static/more_apps_ios.json', 'ios-games-grid', 'ios');
             loadGames('static/more_apps_android.json', 'android-games-grid', 'android');
+
+            // 处理图片加载错误
+            document.addEventListener('error', function(event) {
+                if (event.target.tagName === 'IMG') {
+                    event.target.src = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="#f0e6d8" width="100" height="100"/><text x="50" y="55" text-anchor="middle" fill="#888" font-size="12">游戏图标</text></svg>');
+                }
+            }, true);
         });
     </script>
 
