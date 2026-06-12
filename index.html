@@ -1258,45 +1258,6 @@
             '</svg>'
         );
 
-        const embeddedGames = [
-            {
-                name: 'Railway Worker',
-                icon: 'https://is2-ssl.mzstatic.com/image/thumb/Purple113/v4/46/e6/18/46e618e4-e002-a48f-9458-aec0cd5a752a/AppIcon-0-1x_U007emarketing-0-0-85-220-7.png/230x0w.png',
-                iosLink: 'https://itunes.apple.com/app/1485420263',
-                androidLink: 'https://play.google.com/store/apps/details?id=cn.crane.flutter.plumber.lineworker'
-            },
-            {
-                name: 'Jigsaw World',
-                icon: 'https://is3-ssl.mzstatic.com/image/thumb/Purple123/v4/57/e3/5f/57e35f71-9796-ebc6-e119-ce61e33fd07a/AppIcon-0-1x_U007emarketing-0-0-85-220-7.png/738x0w.jpg',
-                iosLink: 'https://itunes.apple.com/app/id1477751457',
-                androidLink: 'https://play.google.com/store/apps/details?id=cn.crane.flutter.puzzle.jigsaw'
-            },
-            {
-                name: 'Dance Up',
-                icon: 'https://is1-ssl.mzstatic.com/image/thumb/Purple113/v4/e8/1a/1a/e81a1a2d-a106-1892-6091-3d54d30b8619/AppIcon-0-1x_U007emarketing-0-0-85-220-7.png/230x0w.jpg',
-                iosLink: 'https://itunes.apple.com/app/id1475789889',
-                androidLink: 'https://play.google.com/store/apps/details?id=cn.crane.flutter.danceup'
-            },
-            {
-                name: 'Crazy Sudoku',
-                icon: 'https://is5-ssl.mzstatic.com/image/thumb/Purple113/v4/4e/c6/fe/4ec6fe35-0343-3cce-b6bf-ab3f6710d663/AppIcon-0-1x_U007emarketing-0-0-85-220-10.png/230x0w.jpg',
-                iosLink: 'https://itunes.apple.com/app/id1465370843',
-                androidLink: 'https://play.google.com/store/apps/details?id=cn.crane.myapp.flutterSudoku'
-            },
-            {
-                name: 'Touch Number',
-                icon: 'https://is1-ssl.mzstatic.com/image/thumb/Purple113/v4/e4/58/0a/e4580aa1-6848-78bb-2f47-0f69bf69cbc5/AppIcon-0-1x_U007emarketing-0-0-85-220-7.png/230x0w.jpg',
-                iosLink: 'https://itunes.apple.com/app/id1481699832',
-                androidLink: 'https://play.google.com/store/apps/details?id=cn.crane.game.flutter.findx'
-            },
-            {
-                name: 'Flappy UFO',
-                icon: 'https://is3-ssl.mzstatic.com/image/thumb/Purple113/v4/6d/6b/0c/6d6b0cb3-c4f3-5f3c-d1fd-0ac9dcda0748/AppIcon-0-1x_U007emarketing-0-0-85-220-7.png/230x0w.jpg',
-                iosLink: 'https://itunes.apple.com/app/id1482524329',
-                androidLink: 'https://play.google.com/store/apps/details?id=cn.crane.game.flappyufo'
-            }
-        ];
-
         const qrBackdrop = document.getElementById('qr-backdrop');
         const qrCode = document.getElementById('qr-code');
         const qrGameName = document.getElementById('qr-game-name');
@@ -1366,24 +1327,22 @@
             });
         }
 
-        function getEmbeddedGames(platform) {
-            return embeddedGames.map((game) => ({
-                name: game.name,
-                icon: game.icon,
-                link: platform === 'ios' ? game.iosLink : game.androidLink
-            }));
-        }
-
         async function loadGames(url, containerId, platform) {
             const container = document.getElementById(containerId);
 
             if (window.location.protocol === 'file:') {
-                renderGames(container, getEmbeddedGames(platform), platform);
+                const message = document.createElement('p');
+                message.className = 'error-state';
+                message.innerHTML = 'Game data requires a local server.<br>Run <code>python3 -m http.server</code> and open <code>http://localhost:8000</code>.';
+                container.replaceChildren(message);
                 return;
             }
 
             try {
-                const response = await fetch(url);
+                const separator = url.includes('?') ? '&' : '?';
+                const response = await fetch(`${url}${separator}v=${Date.now()}`, {
+                    cache: 'no-store'
+                });
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const data = await response.json();
                 if (!Array.isArray(data.appList)) throw new Error('Invalid game data');
@@ -1391,7 +1350,10 @@
                 renderGames(container, data.appList, platform);
             } catch (error) {
                 console.error(`Failed to load ${platform} games:`, error);
-                renderGames(container, getEmbeddedGames(platform), platform);
+                const message = document.createElement('p');
+                message.className = 'error-state';
+                message.textContent = 'Unable to load game data. Please check the JSON file and refresh.';
+                container.replaceChildren(message);
             }
         }
 
