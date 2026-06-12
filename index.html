@@ -1,661 +1,1460 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CraneStudio - 用心打造每一款休闲游戏">
-    <title>CraneStudio - 休闲游戏工作室</title>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <meta name="description" content="CraneStudio creates delightful casual games for everyone.">
+    <meta name="theme-color" content="#fffaf2">
+    <link rel="icon" href="static/crane-avatar.webp" type="image/webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <title>CraneStudio - Casual Game Studio</title>
+    <script src="static/js/qrcode.min.js"></script>
     <style>
         :root {
-            /* 颜色变量 */
-            --bg-gradient-start: #FFF8F0;
-            --bg-gradient-end: #FFF5E6;
-            --hero-bg: #FFFCF5;
-            --card-bg: #FFFFFF;
-            --primary-color: #FF9F43;
-            --primary-hover: #F7833D;
-            --secondary-color: #FFD4A3;
-            --text-primary: #4A4A4A;
-            --text-secondary: #888888;
-            --border-color: #F0E6D8;
-
-            /* 圆角变量 */
-            --radius-lg: 24px;
+            --orange: #ff8516;
+            --orange-dark: #ef6910;
+            --brand-red: #ef3027;
+            --brand-navy: #17294f;
+            --orange-soft: #fff0dc;
+            --green: #6eaf31;
+            --green-soft: #f2f9e9;
+            --ink: #2f2018;
+            --muted: #786b63;
+            --line: #f1e5d8;
+            --cream: #fffaf2;
+            --white: #ffffff;
+            --shadow: 0 14px 38px rgba(123, 74, 27, 0.09);
+            --shadow-hover: 0 18px 42px rgba(123, 74, 27, 0.16);
+            --radius-xl: 30px;
+            --radius-lg: 22px;
             --radius-md: 16px;
-            --radius-sm: 12px;
-            --radius-pill: 50px;
-
-            /* 阴影变量 */
-            --shadow-card: 0 4px 20px rgba(255, 159, 67, 0.1);
-            --shadow-card-hover: 0 8px 30px rgba(255, 159, 67, 0.2);
-            --shadow-popup: 0 8px 32px rgba(0, 0, 0, 0.15);
         }
 
-        /* 全局重置 */
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
-            min-height: 100vh;
-            color: var(--text-primary);
-            line-height: 1.6;
+            min-width: 320px;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 8% 12%, rgba(255, 209, 143, 0.2), transparent 25%),
+                linear-gradient(180deg, #fffdf9 0%, #fff8ee 52%, #fffdf9 100%);
+            font-family: "Nunito Sans", "Avenir Next", Avenir, sans-serif;
+            line-height: 1.5;
+        }
+
+        body.modal-open {
+            overflow: hidden;
         }
 
         a {
-            text-decoration: none;
             color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            color: inherit;
+            font: inherit;
         }
 
         img {
-            max-width: 100%;
             display: block;
+            max-width: 100%;
         }
 
-        /* 容器 */
-        .container {
-            max-width: 1200px;
+        .shell {
+            width: min(1440px, calc(100% - 40px));
             margin: 0 auto;
-            padding: 20px;
         }
 
-        @media (max-width: 768px) {
-            .container {
-                padding: 12px;
-            }
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: rgba(255, 253, 249, 0.88);
+            border-bottom: 1px solid rgba(241, 229, 216, 0.75);
+            backdrop-filter: blur(16px);
         }
 
-        /* Hero 区域 */
+        .nav {
+            min-height: 82px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 28px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            flex: 0 0 auto;
+            font-size: 24px;
+            font-family: "Fredoka", "Arial Rounded MT Bold", sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.8px;
+        }
+
+        .brand-avatar {
+            width: 46px;
+            height: 46px;
+            object-fit: cover;
+            border: 3px solid #fff;
+            border-radius: 14px;
+            box-shadow: 0 5px 15px rgba(239, 48, 39, 0.2);
+        }
+
+        .brand-name-primary {
+            color: var(--brand-red);
+        }
+
+        .brand-name-secondary {
+            color: var(--brand-navy);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: clamp(20px, 3vw, 42px);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 30px 0 27px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--brand-red);
+        }
+
+        .nav-link.active::after {
+            content: "";
+            width: 28px;
+            height: 3px;
+            position: absolute;
+            left: 50%;
+            bottom: 20px;
+            background: var(--brand-red);
+            border-radius: 99px;
+            transform: translateX(-50%);
+        }
+
+        main {
+            padding: 26px 0 10px;
+        }
+
         .hero {
-            background-color: var(--hero-bg);
-            border-radius: var(--radius-lg);
-            margin-bottom: 32px;
-            padding: 60px 20px;
-            text-align: center;
-            box-shadow: var(--shadow-card);
+            position: relative;
+            min-height: 330px;
+            display: grid;
+            grid-template-columns: 42% 58%;
+            align-items: stretch;
+            overflow: hidden;
+            margin-bottom: 28px;
+            background:
+                radial-gradient(circle at 14% 16%, rgba(255, 202, 84, 0.25), transparent 32%),
+                linear-gradient(135deg, #fff9ed 0%, #fff3d7 100%);
+            border: 1px solid #f6ddba;
+            border-radius: var(--radius-xl);
+            box-shadow: 0 16px 40px rgba(123, 74, 27, 0.12);
         }
 
         .hero-content {
-            max-width: 600px;
-            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 44px 24px 44px 50px;
         }
 
-        .hero-logo {
-            font-size: 48px;
-            margin-bottom: 16px;
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            color: var(--brand-red);
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 1.8px;
+        }
+
+        .hero-label::before {
+            content: "";
+            width: 24px;
+            height: 3px;
+            background: var(--brand-red);
+            border-radius: 99px;
         }
 
         .hero-title {
-            font-size: 32px;
+            font-family: "Fredoka", "Arial Rounded MT Bold", sans-serif;
+            font-size: clamp(40px, 4.4vw, 58px);
             font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 12px;
+            line-height: 0.98;
+            letter-spacing: -1.8px;
         }
 
-        .hero-subtitle {
-            font-size: 18px;
-            color: var(--text-secondary);
+        .hero-title .crane {
+            color: var(--brand-red);
         }
 
-        @media (max-width: 768px) {
-            .hero {
-                padding: 40px 16px;
-                margin-bottom: 20px;
-                border-radius: var(--radius-md);
-            }
-
-            .hero-logo {
-                font-size: 36px;
-            }
-
-            .hero-title {
-                font-size: 24px;
-            }
-
-            .hero-subtitle {
-                font-size: 16px;
-            }
+        .hero-title .studio {
+            color: var(--brand-navy);
         }
 
-        /* 游戏分组 */
-        .game-group {
-            background-color: var(--card-bg);
-            border-radius: var(--radius-lg);
-            padding: 32px 24px;
-            margin-bottom: 32px;
-            box-shadow: var(--shadow-card);
+        .hero-tagline {
+            margin-top: 16px;
+            color: #4f3b31;
+            font-family: "Fredoka", "Arial Rounded MT Bold", sans-serif;
+            font-size: clamp(20px, 2.2vw, 28px);
+            font-weight: 600;
+            line-height: 1.2;
         }
 
-        .group-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 24px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid var(--border-color);
+        .hero-description {
+            max-width: 360px;
+            margin-top: 10px;
+            color: var(--muted);
+            font-size: 15px;
         }
 
-        /* 游戏网格 */
-        .games-grid {
+        .hero-visual {
+            min-width: 0;
+            position: relative;
+            overflow: hidden;
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            place-items: center;
+            background:
+                radial-gradient(circle at center, #fff7e7 0 37%, transparent 37.5%),
+                linear-gradient(145deg, #ffe8bd, #fff8e9);
+            border-radius: 90px 0 0 90px;
+        }
+
+        .hero-visual::before,
+        .hero-visual::after {
+            content: "";
+            position: absolute;
+            pointer-events: none;
+            border-radius: 50%;
+        }
+
+        .hero-visual::before {
+            width: 230px;
+            height: 230px;
+            border: 2px dashed rgba(239, 48, 39, 0.14);
+        }
+
+        .hero-visual::after {
+            width: 310px;
+            height: 310px;
+            border: 1px solid rgba(23, 41, 79, 0.08);
+        }
+
+        .cartoon-phone {
+            width: 154px;
+            height: 276px;
+            position: relative;
+            z-index: 2;
+            padding: 9px;
+            background: var(--brand-navy);
+            border: 4px solid #fff;
+            border-radius: 34px;
+            box-shadow: 0 24px 42px rgba(23, 41, 79, 0.24);
+            transform: rotate(7deg);
+        }
+
+        .cartoon-phone::before {
+            content: "";
+            width: 58px;
+            height: 14px;
+            position: absolute;
+            z-index: 3;
+            top: 8px;
+            left: 50%;
+            background: var(--brand-navy);
+            border-radius: 0 0 10px 10px;
+            transform: translateX(-50%);
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            background:
+                linear-gradient(180deg, #54cef4 0%, #9fe8fa 55%, #d8f5c0 56%, #71c55b 100%);
+            border-radius: 23px;
+        }
+
+        .adventure-sun {
+            width: 32px;
+            height: 32px;
+            position: absolute;
+            top: 33px;
+            right: 17px;
+            background: #ffe463;
+            border-radius: 50%;
+            box-shadow: 0 0 0 7px rgba(255, 229, 99, 0.25);
+        }
+
+        .adventure-cloud {
+            width: 48px;
+            height: 17px;
+            position: absolute;
+            top: 48px;
+            left: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 999px;
+        }
+
+        .adventure-cloud::before,
+        .adventure-cloud::after {
+            content: "";
+            position: absolute;
+            bottom: 4px;
+            background: inherit;
+            border-radius: 50%;
+        }
+
+        .adventure-cloud::before {
+            width: 20px;
+            height: 20px;
+            left: 8px;
+        }
+
+        .adventure-cloud::after {
+            width: 25px;
+            height: 25px;
+            right: 7px;
+        }
+
+        .adventure-hill {
+            width: 110px;
+            height: 70px;
+            position: absolute;
+            right: -28px;
+            bottom: 31px;
+            background: #4aaf63;
+            border-radius: 60% 0 0 0;
+            box-shadow: -61px 18px 0 #79cc58;
+        }
+
+        .adventure-path {
+            width: 38px;
+            height: 90px;
+            position: absolute;
+            left: 46px;
+            bottom: -24px;
+            background: #ffd27c;
+            border-radius: 50% 50% 0 0;
+            transform: rotate(8deg);
+        }
+
+        .adventure-hero {
+            width: 54px;
+            height: 54px;
+            position: absolute;
+            z-index: 2;
+            left: 25px;
+            bottom: 45px;
+            display: grid;
+            place-items: center;
+            color: #603822;
+            background: #ffbd3f;
+            border: 4px solid #ffe57e;
+            border-radius: 50% 50% 43% 43%;
+            box-shadow: 0 7px 0 rgba(40, 92, 71, 0.13);
+            font-size: 17px;
+            font-weight: 900;
+        }
+
+        .adventure-hero::before,
+        .adventure-hero::after {
+            content: "";
+            width: 17px;
+            height: 22px;
+            position: absolute;
+            z-index: -1;
+            top: -9px;
+            background: #ffbd3f;
+            border: 3px solid #ffe57e;
+            border-radius: 80% 20% 50% 50%;
+        }
+
+        .adventure-hero::before {
+            left: 2px;
+            transform: rotate(-28deg);
+        }
+
+        .adventure-hero::after {
+            right: 2px;
+            transform: rotate(28deg);
+        }
+
+        .adventure-star {
+            position: absolute;
+            z-index: 2;
+            color: #fff269;
+            font-size: 19px;
+            text-shadow: 0 2px 4px rgba(64, 82, 153, 0.18);
+        }
+
+        .adventure-star.one { top: 92px; right: 24px; }
+        .adventure-star.two { top: 121px; left: 15px; font-size: 14px; }
+        .adventure-star.three { top: 151px; right: 12px; font-size: 13px; }
+
+        .game-hud {
+            position: absolute;
+            z-index: 3;
+            top: 20px;
+            left: 12px;
+            padding: 4px 8px;
+            color: #fff;
+            background: rgba(23, 41, 79, 0.72);
+            border-radius: 999px;
+            font-size: 8px;
+            font-weight: 900;
+        }
+
+        .mini-phone {
+            width: 98px;
+            height: 174px;
+            position: absolute;
+            z-index: 3;
+            right: 18%;
+            bottom: 28px;
+            padding: 7px;
+            background: #fff;
+            border: 4px solid var(--brand-red);
+            border-radius: 25px;
+            box-shadow: 0 18px 30px rgba(149, 67, 33, 0.18);
+            transform: rotate(-10deg);
+        }
+
+        .mini-phone-screen {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            padding: 31px 8px 18px;
+            background: linear-gradient(180deg, #8ee2f7, #fff0c8);
+            border-radius: 15px;
+        }
+
+        .puzzle-piece {
+            position: relative;
+            display: grid;
+            place-items: center;
+            background: #ffd65e;
+            border: 2px solid rgba(255,255,255,.8);
+            border-radius: 7px;
+            box-shadow: inset 0 -3px 0 rgba(116, 72, 37, 0.1);
+        }
+
+        .puzzle-piece::before {
+            content: "";
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #513729;
+            box-shadow: 10px 0 #513729;
+            transform: translateX(-5px);
+        }
+
+        .puzzle-piece::after {
+            content: "";
+            width: 9px;
+            height: 4px;
+            position: absolute;
+            bottom: 5px;
+            border-bottom: 2px solid #513729;
+            border-radius: 50%;
+        }
+
+        .puzzle-piece.pink { background: #ff8fa9; }
+        .puzzle-piece.blue { background: #72c9f5; }
+        .puzzle-piece.green { background: #92d464; }
+        .puzzle-piece.purple { background: #b69aee; }
+
+        .puzzle-piece.cat::before {
+            width: 14px;
+            height: 11px;
+            background:
+                radial-gradient(circle at 4px 5px, #543729 0 1.5px, transparent 1.8px),
+                radial-gradient(circle at 10px 5px, #543729 0 1.5px, transparent 1.8px),
+                #fff8ed;
+            border-radius: 5px;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .puzzle-piece.cat::after {
+            width: 5px;
+            height: 3px;
+            bottom: 6px;
+            border-bottom: 1px solid #e47b68;
+        }
+
+        .hero-spark {
+            position: absolute;
+            z-index: 4;
+            color: #f7a921;
+            font-size: 28px;
+            line-height: 1;
+        }
+
+        .hero-spark.one {
+            top: 38px;
+            left: 36%;
+        }
+
+        .hero-spark.two {
+            right: 33%;
+            bottom: 31px;
+            color: var(--brand-red);
+            font-size: 18px;
+        }
+
+        .game-section {
+            scroll-margin-top: 104px;
+            margin-bottom: 28px;
+            padding: 30px 26px 26px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(241, 229, 216, 0.9);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow);
+        }
+
+        .section-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             gap: 20px;
             margin-bottom: 24px;
+            padding: 0 8px;
         }
 
-        /* 游戏卡片 */
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            font-size: 23px;
+            font-family: "Fredoka", "Arial Rounded MT Bold", sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .platform-icon {
+            width: 30px;
+            height: 30px;
+            display: inline-grid;
+            place-items: center;
+            color: var(--orange);
+            line-height: 1;
+        }
+
+        .platform-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
+
+        .platform-icon.android {
+            color: var(--green);
+        }
+
+        .more-link,
+        .detail-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: 1.5px solid #ffb665;
+            border-radius: 999px;
+            color: var(--orange-dark);
+            background: #fff;
+            font-weight: 800;
+            transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .more-link {
+            min-height: 42px;
+            padding: 0 20px;
+            font-size: 13px;
+        }
+
+        .more-link:hover,
+        .detail-btn:hover {
+            color: #fff;
+            background: var(--orange);
+            border-color: var(--orange);
+            transform: translateY(-2px);
+        }
+
+        .game-section.android .more-link,
+        .game-section.android .detail-btn {
+            color: #589724;
+            border-color: #a9d47b;
+        }
+
+        .game-section.android .more-link:hover,
+        .game-section.android .detail-btn:hover {
+            color: #fff;
+            background: var(--green);
+            border-color: var(--green);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+            gap: 18px;
+            min-height: 242px;
+        }
+
         .game-card {
-            background-color: var(--card-bg);
-            border-radius: var(--radius-md);
-            padding: 20px;
-            text-align: center;
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 22px 16px 18px;
+            background: #fff;
+            border: 1px solid #f2e8dd;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 8px 22px rgba(84, 59, 32, 0.08);
             cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         }
 
-        .game-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-card-hover);
+        .game-card:hover,
+        .game-card:focus-visible {
+            border-color: #ffd09b;
+            box-shadow: var(--shadow-hover);
+            outline: none;
+            transform: translateY(-6px);
         }
 
         .game-icon {
-            width: 100px;
-            height: 100px;
-            border-radius: var(--radius-sm);
-            margin: 0 auto 16px;
+            width: 112px;
+            height: 112px;
+            flex: 0 0 auto;
             object-fit: cover;
+            margin-bottom: 16px;
+            background: var(--orange-soft);
+            border-radius: 24px;
+            box-shadow: 0 8px 18px rgba(60, 42, 25, 0.13);
         }
 
         .game-name {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 16px;
-            white-space: nowrap;
+            width: 100%;
+            min-height: 48px;
+            display: grid;
+            place-items: center;
             overflow: hidden;
-            text-overflow: ellipsis;
+            margin-bottom: 13px;
+            text-align: center;
+            font-size: 16px;
+            font-family: "Nunito Sans", sans-serif;
+            font-weight: 800;
+            line-height: 1.35;
         }
 
-        .btn-detail {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
-            color: white;
-            padding: 10px 20px;
-            border-radius: var(--radius-pill);
-            font-size: 14px;
-            font-weight: 500;
-            border: none;
+        .detail-btn {
+            min-width: 120px;
+            min-height: 39px;
+            padding: 0 18px;
+            font-size: 13px;
             cursor: pointer;
-            transition: opacity 0.3s ease;
         }
 
-        .btn-detail:hover {
-            opacity: 0.9;
-        }
-
-        /* 更多游戏按钮 */
-        .more-games {
+        .loading-state,
+        .error-state {
+            grid-column: 1 / -1;
+            display: grid;
+            place-items: center;
+            color: var(--muted);
             text-align: center;
-            padding-top: 8px;
         }
 
-        .btn-more {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
-            color: white;
-            padding: 12px 32px;
-            border-radius: var(--radius-pill);
-            font-size: 14px;
+        .loading-state::before {
+            content: "";
+            width: 28px;
+            height: 28px;
+            margin-bottom: 10px;
+            border: 3px solid #ffe1bd;
+            border-top-color: var(--orange);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .about {
+            scroll-margin-top: 104px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 28px;
+            padding: 34px 42px;
+            background: linear-gradient(135deg, #fff0dc, #fffaf2);
+            border: 1px solid #f8dfc0;
+            border-radius: var(--radius-xl);
+        }
+
+        .about h2 {
+            margin-bottom: 8px;
+            font-size: 24px;
+            font-family: "Fredoka", "Arial Rounded MT Bold", sans-serif;
             font-weight: 600;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .btn-more:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(255, 159, 67, 0.3);
+        .about p {
+            max-width: 720px;
+            color: var(--muted);
         }
 
-        @media (max-width: 768px) {
-            .game-group {
-                padding: 20px 16px;
-                margin-bottom: 20px;
-                border-radius: var(--radius-md);
-            }
-
-            .group-title {
-                font-size: 18px;
-                margin-bottom: 16px;
-            }
-
-            .games-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-                margin-bottom: 16px;
-            }
-
-            .game-card {
-                padding: 16px;
-            }
-
-            .game-icon {
-                width: 80px;
-                height: 80px;
-                margin-bottom: 12px;
-            }
-
-            .game-name {
-                font-size: 14px;
-                margin-bottom: 12px;
-            }
-
-            .btn-detail {
-                padding: 8px 16px;
-                font-size: 12px;
-            }
+        .about a {
+            padding: 12px 24px;
+            color: #fff;
+            background: var(--orange);
+            border-radius: 999px;
+            font-weight: 800;
+            white-space: nowrap;
         }
 
-        /* 底部 */
-        .footer {
+        footer {
+            padding: 26px 0 40px;
+            color: var(--muted);
+            border-top: 1px solid var(--line);
             text-align: center;
-            padding: 40px 20px;
-        }
-
-        .footer-divider {
-            height: 1px;
-            background-color: var(--border-color);
-            margin-bottom: 24px;
-        }
-
-        .copyright {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
+            font-size: 13px;
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            font-size: 14px;
-            color: var(--text-primary);
-            transition: color 0.3s ease;
+            gap: 18px;
+            margin-top: 8px;
         }
 
         .footer-links a:hover {
-            color: var(--primary-color);
+            color: var(--orange);
         }
 
-        .separator {
-            color: var(--text-secondary);
-        }
-
-        @media (max-width: 768px) {
-            .footer {
-                padding: 24px 16px;
-            }
-
-            .copyright,
-            .footer-links a {
-                font-size: 12px;
-            }
-        }
-
-        /* 遮罩层 */
-        .overlay {
+        .qr-backdrop {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: transparent;
-            z-index: 998;
-            display: none;
-        }
-
-        .overlay.active {
-            display: block;
-        }
-
-        /* 二维码弹窗 */
-        .qr-popup {
-            position: fixed;
-            z-index: 999;
-            display: none;
-            pointer-events: none;
-        }
-
-        .qr-popup.active {
-            display: block;
-            pointer-events: auto;
-        }
-
-        .qr-popup-content {
-            background-color: var(--card-bg);
-            border-radius: var(--radius-md);
+            z-index: 100;
+            inset: 0;
+            display: grid;
+            place-items: center;
             padding: 20px;
-            box-shadow: var(--shadow-popup);
-            width: 240px;
-            text-align: center;
+            visibility: hidden;
+            background: rgba(41, 29, 20, 0.46);
+            opacity: 0;
+            backdrop-filter: blur(5px);
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+        }
+
+        .qr-backdrop.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .qr-dialog {
+            width: min(360px, 100%);
             position: relative;
+            padding: 34px 30px 30px;
+            background: #fff;
+            border-radius: 26px;
+            box-shadow: 0 24px 70px rgba(32, 21, 14, 0.3);
+            text-align: center;
+            transform: translateY(12px) scale(0.97);
+            transition: transform 0.2s ease;
+        }
+
+        .qr-backdrop.active .qr-dialog {
+            transform: translateY(0) scale(1);
         }
 
         .qr-close {
+            width: 34px;
+            height: 34px;
             position: absolute;
-            top: 8px;
-            right: 12px;
-            background: none;
-            border: none;
-            font-size: 20px;
-            color: var(--text-secondary);
+            top: 13px;
+            right: 13px;
+            color: #8c8179;
+            background: #f7f2ed;
+            border: 0;
+            border-radius: 50%;
             cursor: pointer;
-            padding: 4px;
+            font-size: 22px;
             line-height: 1;
         }
 
-        .qr-close:hover {
-            color: var(--text-primary);
-        }
-
         .qr-code {
-            width: 160px;
-            height: 160px;
-            margin: 0 auto 16px;
-            background-color: white;
-            padding: 8px;
+            width: 190px;
+            height: 190px;
+            display: grid;
+            place-items: center;
+            margin: 4px auto 18px;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 16px;
         }
 
-        .qr-code canvas {
+        .qr-code canvas,
+        .qr-code img {
             width: 100% !important;
             height: 100% !important;
         }
 
-        .qr-game-name {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 8px;
+        .qr-dialog h3 {
+            margin-bottom: 7px;
+            font-size: 19px;
         }
 
-        .qr-hint {
-            font-size: 12px;
-            color: var(--text-secondary);
+        .qr-dialog p {
+            color: var(--muted);
+            font-size: 13px;
         }
 
-        .qr-arrow {
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-top: 10px solid var(--card-bg);
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            top: -10px;
+        @media (max-width: 1100px) {
+            .nav-links {
+                gap: 18px;
+            }
+
         }
 
-        .qr-arrow.arrow-up {
-            border-top: none;
-            border-bottom: 10px solid var(--card-bg);
-            top: auto;
-            bottom: -10px;
+        @media (max-width: 840px) {
+            .hero {
+                grid-template-columns: 46% 54%;
+            }
+
+            .hero-content {
+                padding: 34px 18px 34px 30px;
+            }
+
+            .hero-description {
+                display: none;
+            }
+
         }
 
-        /* 加载状态 */
-        .games-grid.loading {
-            min-height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        @media (max-width: 720px) {
+            .shell {
+                width: min(100% - 24px, 560px);
+            }
+
+            .site-header {
+                position: static;
+            }
+
+            .nav {
+                min-height: 68px;
+            }
+
+            .brand {
+                font-size: 21px;
+            }
+
+            .brand-avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 12px;
+            }
+
+            .nav-links .nav-link {
+                display: none;
+            }
+
+            main {
+                padding-top: 14px;
+            }
+
+            .hero {
+                min-height: 0;
+                grid-template-columns: 1fr;
+                border-radius: 20px;
+            }
+
+            .hero-content {
+                align-items: center;
+                padding: 32px 24px 28px;
+                text-align: center;
+            }
+
+            .hero-label {
+                margin-bottom: 9px;
+            }
+
+            .hero-title {
+                font-size: 42px;
+            }
+
+            .hero-tagline {
+                margin-top: 11px;
+                font-size: 22px;
+            }
+
+            .hero-description {
+                display: block;
+                margin-top: 8px;
+                font-size: 14px;
+            }
+
+            .hero-visual {
+                height: 210px;
+                border-radius: 42px 42px 0 0;
+            }
+
+            .hero-visual::before {
+                width: 175px;
+                height: 175px;
+            }
+
+            .hero-visual::after {
+                width: 240px;
+                height: 240px;
+            }
+
+            .cartoon-phone {
+                width: 108px;
+                height: 192px;
+                padding: 6px;
+                border-width: 3px;
+                border-radius: 26px;
+            }
+
+            .cartoon-phone::before {
+                width: 42px;
+                height: 10px;
+                top: 6px;
+            }
+
+            .phone-screen {
+                border-radius: 18px;
+            }
+
+            .adventure-sun {
+                width: 23px;
+                height: 23px;
+                top: 25px;
+                right: 12px;
+                box-shadow: 0 0 0 5px rgba(255, 229, 99, 0.25);
+            }
+
+            .adventure-cloud {
+                width: 34px;
+                height: 12px;
+                top: 36px;
+                left: 8px;
+            }
+
+            .adventure-cloud::before {
+                width: 14px;
+                height: 14px;
+                left: 5px;
+            }
+
+            .adventure-cloud::after {
+                width: 18px;
+                height: 18px;
+                right: 4px;
+            }
+
+            .adventure-hill {
+                width: 78px;
+                height: 50px;
+                right: -20px;
+                bottom: 21px;
+                box-shadow: -43px 12px 0 #79cc58;
+            }
+
+            .adventure-path {
+                width: 26px;
+                height: 65px;
+                left: 33px;
+            }
+
+            .adventure-hero {
+                width: 38px;
+                height: 38px;
+                left: 17px;
+                bottom: 31px;
+                border-width: 3px;
+                font-size: 12px;
+            }
+
+            .adventure-hero::before,
+            .adventure-hero::after {
+                width: 12px;
+                height: 16px;
+                top: -7px;
+                border-width: 2px;
+            }
+
+            .adventure-star.one { top: 65px; right: 16px; font-size: 13px; }
+            .adventure-star.two { top: 87px; left: 10px; font-size: 10px; }
+            .adventure-star.three { top: 106px; right: 8px; font-size: 9px; }
+
+            .game-hud {
+                top: 14px;
+                left: 8px;
+                padding: 3px 5px;
+                font-size: 6px;
+            }
+
+            .mini-phone {
+                width: 69px;
+                height: 122px;
+                right: 15%;
+                bottom: 17px;
+                padding: 4px;
+                border-width: 3px;
+                border-radius: 19px;
+            }
+
+            .mini-phone-screen {
+                gap: 3px;
+                padding: 22px 5px 12px;
+                border-radius: 12px;
+            }
+
+            .mini-phone-screen span {
+                border-radius: 4px;
+                font-size: 8px;
+            }
+
+            .game-section {
+                padding: 23px 14px 18px;
+                border-radius: 24px;
+            }
+
+            .section-head {
+                margin-bottom: 18px;
+                padding: 0 2px;
+            }
+
+            .section-title {
+                gap: 8px;
+                font-size: 19px;
+            }
+
+            .platform-icon {
+                font-size: 24px;
+            }
+
+            .more-link {
+                min-height: 36px;
+                padding: 0 12px;
+                font-size: 11px;
+            }
+
+            .games-grid {
+                grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+                gap: 12px;
+                min-height: 200px;
+            }
+
+            .game-card {
+                padding: 15px 10px 14px;
+                border-radius: 18px;
+            }
+
+            .game-icon {
+                width: 88px;
+                height: 88px;
+                margin-bottom: 12px;
+                border-radius: 19px;
+            }
+
+            .game-name {
+                min-height: 40px;
+                margin-bottom: 9px;
+                font-size: 13px;
+            }
+
+            .detail-btn {
+                min-width: 102px;
+                min-height: 34px;
+                padding: 0 12px;
+                font-size: 11px;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+                padding: 28px 24px;
+                text-align: center;
+            }
+
+            .about a {
+                justify-self: center;
+            }
         }
 
-        .loading-text {
-            color: var(--text-secondary);
-            font-size: 14px;
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-logo">🎮 CraneStudio</div>
-                <h1 class="hero-title">用心打造每一款休闲游戏</h1>
-                <p class="hero-subtitle">让快乐触手可及</p>
+    <header class="site-header">
+        <nav class="nav shell" aria-label="Main navigation">
+            <a class="brand" href="#home" aria-label="CraneStudio home">
+                <img class="brand-avatar" src="static/crane-avatar.webp" alt="">
+                <span><span class="brand-name-primary">Crane</span><span class="brand-name-secondary">Studio</span></span>
+            </a>
+            <div class="nav-links">
+                <a class="nav-link active" href="#home">Home</a>
+                <a class="nav-link" href="#ios-games">iOS Games</a>
+                <a class="nav-link" href="#android-games">Android Games</a>
+                <a class="nav-link" href="#about">About Us</a>
             </div>
-        </div>
+        </nav>
     </header>
 
-    <!-- Games Section -->
-    <main class="container">
-        <!-- iOS Games -->
-        <section class="game-group" id="ios-games">
-            <h2 class="group-title">🍎 iOS 游戏</h2>
-            <div class="games-grid" id="ios-games-grid">
-                <!-- 游戏卡片将由 JavaScript 动态加载 -->
+    <main class="shell" id="home">
+        <section class="hero" aria-label="CraneStudio - Make beautiful games">
+            <div class="hero-content">
+                <div class="hero-label">CASUAL GAME STUDIO</div>
+                <h1 class="hero-title"><span class="crane">Crane</span><span class="studio">Studio</span></h1>
+                <p class="hero-tagline">Make beautiful games.</p>
+                <p class="hero-description">Playful mobile experiences, thoughtfully made for everyday moments.</p>
             </div>
-            <div class="more-games">
-                <a href="https://apps.apple.com/cn/developer/id1061441649" class="btn-more" target="_blank">
-                    更多 iOS 游戏 →
-                </a>
+            <div class="hero-visual" aria-hidden="true">
+                <span class="hero-spark one">✦</span>
+                <span class="hero-spark two">✦</span>
+                <div class="cartoon-phone">
+                    <div class="phone-screen">
+                        <span class="game-hud">★ 120</span>
+                        <span class="adventure-sun"></span>
+                        <span class="adventure-cloud"></span>
+                        <span class="adventure-hill"></span>
+                        <span class="adventure-path"></span>
+                        <span class="adventure-star one">★</span>
+                        <span class="adventure-star two">★</span>
+                        <span class="adventure-star three">★</span>
+                        <span class="adventure-hero">•ᴗ•</span>
+                    </div>
+                </div>
+                <div class="mini-phone">
+                    <div class="mini-phone-screen">
+                        <span class="puzzle-piece cat"></span>
+                        <span class="puzzle-piece pink"></span>
+                        <span class="puzzle-piece blue"></span>
+                        <span class="puzzle-piece green"></span>
+                        <span class="puzzle-piece cat"></span>
+                        <span class="puzzle-piece purple"></span>
+                        <span class="puzzle-piece blue"></span>
+                        <span class="puzzle-piece pink"></span>
+                        <span class="puzzle-piece green"></span>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Android Games -->
-        <section class="game-group" id="android-games">
-            <h2 class="group-title">🤖 Android 游戏</h2>
-            <div class="games-grid" id="android-games-grid">
-                <!-- 游戏卡片将由 JavaScript 动态加载 -->
-            </div>
-            <div class="more-games">
-                <a href="https://play.google.com/store/apps/dev?id=8588964176065625833" class="btn-more" target="_blank">
-                    更多 Android 游戏 →
+        <section class="game-section" id="ios-games" aria-labelledby="ios-title">
+            <div class="section-head">
+                <h2 class="section-title" id="ios-title">
+                    <span class="platform-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17.05 12.54c.03 3.23 2.83 4.31 2.86 4.33-.02.08-.45 1.55-1.48 3.07-.9 1.31-1.84 2.62-3.31 2.65-1.45.03-1.91-.85-3.56-.85-1.66 0-2.17.82-3.54.88-1.42.05-2.5-1.43-3.41-2.74-1.86-2.69-3.28-7.6-1.37-10.92A5.3 5.3 0 0 1 7.75 6.4c1.4-.03 2.72.94 3.56.94.84 0 2.42-1.17 4.08-1  .69.03 2.65.28 3.9 2.11-.1.06-2.33 1.36-2.24 4.09ZM14.3 4.6c.75-.91 1.26-2.18 1.12-3.44-1.08.04-2.38.72-3.16 1.63-.69.8-1.3 2.09-1.14 3.32 1.2.09 2.43-.61 3.18-1.51Z"/>
+                        </svg>
+                    </span>
+                    iOS Games
+                </h2>
+                <a class="more-link" href="https://apps.apple.com/cn/developer/id1061441649" target="_blank" rel="noopener">
+                    More iOS Games <span aria-hidden="true">→</span>
                 </a>
             </div>
+            <div class="games-grid" id="ios-games-grid" aria-live="polite">
+                <div class="loading-state">Loading games...</div>
+            </div>
+        </section>
+
+        <section class="game-section android" id="android-games" aria-labelledby="android-title">
+            <div class="section-head">
+                <h2 class="section-title" id="android-title">
+                    <span class="platform-icon android" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                            <path d="m17.6 9.48 1.84-3.18a.55.55 0 0 0-.95-.55l-1.86 3.21A11.5 11.5 0 0 0 12 8a11.5 11.5 0 0 0-4.63.96L5.51 5.75a.55.55 0 1 0-.95.55L6.4 9.48A8.92 8.92 0 0 0 2.03 16h19.94a8.92 8.92 0 0 0-4.37-6.52ZM7.5 13.25a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm9 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2ZM2 17v1.5A2.5 2.5 0 0 0 4.5 21h1v1.5a1.5 1.5 0 0 0 3 0V21h7v1.5a1.5 1.5 0 0 0 3 0V21h1a2.5 2.5 0 0 0 2.5-2.5V17H2Z"/>
+                        </svg>
+                    </span>
+                    Android Games
+                </h2>
+                <a class="more-link" href="https://play.google.com/store/apps/dev?id=8588964176065625833" target="_blank" rel="noopener">
+                    More Android Games <span aria-hidden="true">→</span>
+                </a>
+            </div>
+            <div class="games-grid" id="android-games-grid" aria-live="polite">
+                <div class="loading-state">Loading games...</div>
+            </div>
+        </section>
+
+        <section class="about" id="about">
+            <div>
+                <h2>Simple, Playful, Ready Anytime</h2>
+                <p>CraneStudio creates approachable mobile games designed to bring a little moment of joy whenever you play.</p>
+            </div>
+            <a href="mailto:cranedev@163.com">Contact CraneStudio</a>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-divider"></div>
-        <p class="copyright" id="copyright"></p>
-        <div class="footer-links">
-            <a href="release/privacy.html">隐私政策</a>
-            <span class="separator">·</span>
-            <a href="release/tos.html">服务条款</a>
+    <footer>
+        <div class="shell">
+            <p id="copyright">© 2018 CraneStudio</p>
+            <div class="footer-links">
+                <a href="release/privacy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+                <a href="release/tos.html" target="_blank" rel="noopener noreferrer">Terms of Service</a>
+                <a href="mailto:cranedev@163.com">Contact Us</a>
+            </div>
         </div>
     </footer>
 
-    <!-- QR Code Popup -->
-    <div class="qr-popup" id="qr-popup">
-        <div class="qr-popup-content">
-            <button class="qr-close" id="qr-close">&times;</button>
+    <div class="qr-backdrop" id="qr-backdrop" role="presentation">
+        <div class="qr-dialog" role="dialog" aria-modal="true" aria-labelledby="qr-title" aria-describedby="qr-hint">
+            <button class="qr-close" id="qr-close" type="button" aria-label="Close QR code dialog">×</button>
             <div class="qr-code" id="qr-code"></div>
-            <p class="qr-game-name" id="qr-game-name"></p>
-            <p class="qr-hint">请用手机扫码前往 App Store</p>
+            <h3 id="qr-title">Open in the App Store</h3>
+            <p id="qr-game-name"></p>
+            <p id="qr-hint">Scan this QR code with your phone.</p>
         </div>
-        <div class="qr-arrow" id="qr-arrow"></div>
     </div>
 
-    <!-- Overlay for closing popup -->
-    <div class="overlay" id="overlay"></div>
-
     <script>
-        // 判断是否为移动设备
-        function isMobile() {
-            return /Android|webOS|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        const fallbackIcon = 'data:image/svg+xml,' + encodeURIComponent(
+            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">' +
+            '<rect width="120" height="120" rx="25" fill="#fff0dc"/>' +
+            '<circle cx="60" cy="51" r="27" fill="#ffb52e"/>' +
+            '<circle cx="50" cy="48" r="3" fill="#5d3824"/>' +
+            '<circle cx="70" cy="48" r="3" fill="#5d3824"/>' +
+            '<path d="M52 61q8 8 16 0" fill="none" stroke="#5d3824" stroke-width="3" stroke-linecap="round"/>' +
+            '<text x="60" y="101" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#8a684f">CraneStudio</text>' +
+            '</svg>'
+        );
+
+        const embeddedGames = [
+            {
+                name: 'Railway Worker',
+                icon: 'https://is2-ssl.mzstatic.com/image/thumb/Purple113/v4/46/e6/18/46e618e4-e002-a48f-9458-aec0cd5a752a/AppIcon-0-1x_U007emarketing-0-0-85-220-7.png/230x0w.png',
+                iosLink: 'https://itunes.apple.com/app/1485420263',
+                androidLink: 'https://play.google.com/store/apps/details?id=cn.crane.flutter.plumber.lineworker'
+            },
+            {
+                name: 'Jigsaw World',
+                icon: 'https://is3-ssl.mzstatic.com/image/thumb/Purple123/v4/57/e3/5f/57e35f71-9796-ebc6-e119-ce61e33fd07a/AppIcon-0-1x_U007emarketing-0-0-85-220-7.png/738x0w.jpg',
+                iosLink: 'https://itunes.apple.com/app/id1477751457',
+                androidLink: 'https://play.google.com/store/apps/details?id=cn.crane.flutter.puzzle.jigsaw'
+            },
+            {
+                name: 'Dance Up',
+                icon: 'https://is1-ssl.mzstatic.com/image/thumb/Purple113/v4/e8/1a/1a/e81a1a2d-a106-1892-6091-3d54d30b8619/AppIcon-0-1x_U007emarketing-0-0-85-220-7.png/230x0w.jpg',
+                iosLink: 'https://itunes.apple.com/app/id1475789889',
+                androidLink: 'https://play.google.com/store/apps/details?id=cn.crane.flutter.danceup'
+            },
+            {
+                name: 'Crazy Sudoku',
+                icon: 'https://is5-ssl.mzstatic.com/image/thumb/Purple113/v4/4e/c6/fe/4ec6fe35-0343-3cce-b6bf-ab3f6710d663/AppIcon-0-1x_U007emarketing-0-0-85-220-10.png/230x0w.jpg',
+                iosLink: 'https://itunes.apple.com/app/id1465370843',
+                androidLink: 'https://play.google.com/store/apps/details?id=cn.crane.myapp.flutterSudoku'
+            },
+            {
+                name: 'Touch Number',
+                icon: 'https://is1-ssl.mzstatic.com/image/thumb/Purple113/v4/e4/58/0a/e4580aa1-6848-78bb-2f47-0f69bf69cbc5/AppIcon-0-1x_U007emarketing-0-0-85-220-7.png/230x0w.jpg',
+                iosLink: 'https://itunes.apple.com/app/id1481699832',
+                androidLink: 'https://play.google.com/store/apps/details?id=cn.crane.game.flutter.findx'
+            },
+            {
+                name: 'Flappy UFO',
+                icon: 'https://is3-ssl.mzstatic.com/image/thumb/Purple113/v4/6d/6b/0c/6d6b0cb3-c4f3-5f3c-d1fd-0ac9dcda0748/AppIcon-0-1x_U007emarketing-0-0-85-220-7.png/230x0w.jpg',
+                iosLink: 'https://itunes.apple.com/app/id1482524329',
+                androidLink: 'https://play.google.com/store/apps/details?id=cn.crane.game.flappyufo'
+            }
+        ];
+
+        const qrBackdrop = document.getElementById('qr-backdrop');
+        const qrCode = document.getElementById('qr-code');
+        const qrGameName = document.getElementById('qr-game-name');
+        const qrClose = document.getElementById('qr-close');
+        let lastFocusedElement = null;
+
+        function isMobileDevice() {
+            return window.matchMedia('(pointer: coarse)').matches ||
+                /Android|webOS|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
         }
 
-        // 获取当前年份并更新版权信息
-        function updateCopyright() {
-            const year = new Date().getFullYear();
-            document.getElementById('copyright').textContent = `© 2018-${year} CraneStudio`;
+        function openGame(game, platform) {
+            if (platform === 'ios' && !isMobileDevice()) {
+                showQRCode(game.link, game.name);
+                return;
+            }
+            window.location.href = game.link;
         }
 
-        // 创建游戏卡片 HTML
         function createGameCard(game, platform) {
-            const card = document.createElement('div');
+            const card = document.createElement('article');
+            const icon = document.createElement('img');
+            const name = document.createElement('h3');
+            const button = document.createElement('button');
+
             card.className = 'game-card';
-            card.innerHTML = `
-                <img class="game-icon" src="${game.icon}" alt="${game.name}" loading="lazy">
-                <p class="game-name">${game.name}</p>
-                <button class="btn-detail" data-link="${game.link}" data-name="${game.name}" data-platform="${platform}">
-                    查看详情 →
-                </button>
-            `;
+            card.tabIndex = 0;
+            card.setAttribute('role', 'link');
+            card.setAttribute('aria-label', `View details for ${game.name}`);
+
+            icon.className = 'game-icon';
+            icon.src = game.icon;
+            icon.alt = `${game.name} game icon`;
+            icon.loading = 'lazy';
+            icon.referrerPolicy = 'no-referrer';
+            icon.addEventListener('error', () => {
+                icon.src = fallbackIcon;
+            }, { once: true });
+
+            name.className = 'game-name';
+            name.textContent = game.name;
+
+            button.className = 'detail-btn';
+            button.type = 'button';
+            button.innerHTML = 'View Details <span aria-hidden="true">→</span>';
+            button.addEventListener('click', (event) => {
+                event.stopPropagation();
+                openGame(game, platform);
+            });
+
+            card.addEventListener('click', () => openGame(game, platform));
+            card.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    openGame(game, platform);
+                }
+            });
+
+            card.append(icon, name, button);
             return card;
         }
 
-        // 加载并渲染游戏列表（优化版）
-        async function loadGames(jsonUrl, containerId, platform) {
+        function renderGames(container, games, platform) {
+            container.replaceChildren();
+            games.forEach((game) => {
+                container.appendChild(createGameCard(game, platform));
+            });
+        }
+
+        function getEmbeddedGames(platform) {
+            return embeddedGames.map((game) => ({
+                name: game.name,
+                icon: game.icon,
+                link: platform === 'ios' ? game.iosLink : game.androidLink
+            }));
+        }
+
+        async function loadGames(url, containerId, platform) {
             const container = document.getElementById(containerId);
-            container.innerHTML = '<p class="loading-text">加载中...</p>';
-            container.classList.add('loading');
+
+            if (window.location.protocol === 'file:') {
+                renderGames(container, getEmbeddedGames(platform), platform);
+                return;
+            }
 
             try {
-                const response = await fetch(jsonUrl);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const data = await response.json();
-                container.innerHTML = '';
-                container.classList.remove('loading');
-                data.appList.forEach(game => {
-                    const card = createGameCard(game, platform);
-                    container.appendChild(card);
-                });
+                if (!Array.isArray(data.appList)) throw new Error('Invalid game data');
+
+                renderGames(container, data.appList, platform);
             } catch (error) {
-                console.error('Failed to load games:', error);
-                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-secondary);">游戏列表加载失败，请刷新页面重试</p>';
-                container.classList.remove('loading');
+                console.error(`Failed to load ${platform} games:`, error);
+                renderGames(container, getEmbeddedGames(platform), platform);
             }
         }
 
-        // 二维码弹窗相关元素
-        const qrPopup = document.getElementById('qr-popup');
-        const qrCode = document.getElementById('qr-code');
-        const qrGameName = document.getElementById('qr-game-name');
-        const qrArrow = document.getElementById('qr-arrow');
-        const qrClose = document.getElementById('qr-close');
-        const overlay = document.getElementById('overlay');
-
-        // 显示二维码弹窗
-        function showQRCodePopup(url, gameName, event) {
-            // 清空之前的二维码
-            qrCode.innerHTML = '';
-
-            // 生成二维码
-            QRCode.toCanvas(url, { width: 144, margin: 0 }, function(error, canvas) {
-                if (error) {
-                    console.error(error);
-                    return;
-                }
-                qrCode.appendChild(canvas);
-            });
-
-            // 设置游戏名称
+        function showQRCode(url, gameName) {
+            lastFocusedElement = document.activeElement;
+            qrCode.replaceChildren();
             qrGameName.textContent = gameName;
 
-            // 计算弹窗位置
-            const rect = event.target.getBoundingClientRect();
-            const popupWidth = 240;
-            const popupHeight = 280;
-
-            let left = rect.left + rect.width / 2 - popupWidth / 2;
-            let top = rect.bottom + 20;
-            let arrowUp = false;
-
-            // 检查是否超出右边界
-            if (left + popupWidth > window.innerWidth - 20) {
-                left = window.innerWidth - popupWidth - 20;
-            }
-
-            // 检查是否超出左边界
-            if (left < 20) {
-                left = 20;
-            }
-
-            // 检查是否超出下边界
-            if (top + popupHeight > window.innerHeight - 20) {
-                top = rect.top - popupHeight - 20;
-                arrowUp = true;
-            }
-
-            // 设置箭头方向
-            if (arrowUp) {
-                qrArrow.classList.add('arrow-up');
+            if (typeof window.QRCode === 'function') {
+                try {
+                    new window.QRCode(qrCode, {
+                        text: url,
+                        width: 170,
+                        height: 170,
+                        colorDark: '#2f2018',
+                        colorLight: '#ffffff',
+                        correctLevel: window.QRCode.CorrectLevel.H
+                    });
+                } catch (error) {
+                    console.error('Failed to generate QR code:', error);
+                    showQRCodeFallback(url);
+                }
             } else {
-                qrArrow.classList.remove('arrow-up');
+                showQRCodeFallback(url);
             }
 
-            // 设置弹窗位置
-            qrPopup.style.left = `${left}px`;
-            qrPopup.style.top = `${top}px`;
-
-            // 显示弹窗和遮罩
-            qrPopup.classList.add('active');
-            overlay.classList.add('active');
+            qrBackdrop.classList.add('active');
+            document.body.classList.add('modal-open');
+            qrClose.focus();
         }
 
-        // 隐藏二维码弹窗
-        function hideQRCodePopup() {
-            qrPopup.classList.remove('active');
-            overlay.classList.remove('active');
+        function showQRCodeFallback(url) {
+            const link = document.createElement('a');
+            link.href = url;
+            link.target = '_blank';
+            link.rel = 'noopener';
+            link.textContent = 'Unable to load the QR code. Open the App Store instead.';
+            link.style.color = 'var(--orange-dark)';
+            link.style.fontWeight = '800';
+            qrCode.replaceChildren(link);
         }
 
-        // 绑定关闭弹窗事件
-        qrClose.addEventListener('click', hideQRCodePopup);
-        overlay.addEventListener('click', hideQRCodePopup);
+        function closeQRCode() {
+            qrBackdrop.classList.remove('active');
+            document.body.classList.remove('modal-open');
+            if (lastFocusedElement) lastFocusedElement.focus();
+        }
 
-        // 处理游戏卡片点击事件（事件委托）
-        document.addEventListener('click', function(event) {
-            if (event.target.classList.contains('btn-detail')) {
-                const link = event.target.dataset.link;
-                const name = event.target.dataset.name;
-                const platform = event.target.dataset.platform;
-
-                if (platform === 'ios') {
-                    if (isMobile()) {
-                        // 手机端直接跳转
-                        window.location.href = link;
-                    } else {
-                        // PC端显示二维码弹窗
-                        event.preventDefault();
-                        showQRCodePopup(link, name, event);
-                    }
-                } else {
-                    // Android 所有端直接跳转
-                    window.location.href = link;
-                }
+        qrClose.addEventListener('click', closeQRCode);
+        qrBackdrop.addEventListener('click', (event) => {
+            if (event.target === qrBackdrop) closeQRCode();
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && qrBackdrop.classList.contains('active')) {
+                closeQRCode();
             }
         });
 
-        // 页面加载完成后初始化
-        document.addEventListener('DOMContentLoaded', function() {
-            // 更新版权年份
-            updateCopyright();
+        document.getElementById('copyright').textContent =
+            `© 2018-${new Date().getFullYear()} CraneStudio. All rights reserved.`;
 
-            // 加载游戏列表
-            loadGames('static/more_apps_ios.json', 'ios-games-grid', 'ios');
-            loadGames('static/more_apps_android.json', 'android-games-grid', 'android');
-
-            // 处理图片加载错误
-            document.addEventListener('error', function(event) {
-                if (event.target.tagName === 'IMG') {
-                    event.target.src = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="#f0e6d8" width="100" height="100"/><text x="50" y="55" text-anchor="middle" fill="#888" font-size="12">游戏图标</text></svg>');
-                }
-            }, true);
-        });
+        loadGames('static/more_apps_ios.json', 'ios-games-grid', 'ios');
+        loadGames('static/more_apps_android.json', 'android-games-grid', 'android');
     </script>
 </body>
 </html>
