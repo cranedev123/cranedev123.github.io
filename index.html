@@ -1266,7 +1266,7 @@
                 <h2>Simple, Playful, Ready Anytime</h2>
                 <p>CraneStudio creates approachable mobile games designed to bring a little moment of joy whenever you play.</p>
             </div>
-            <a href="mailto:cranedev@163.com">Contact CraneStudio</a>
+            <a href="mailto:cranedev@163.com" target="_blank" rel="noopener noreferrer">Contact CraneStudio</a>
         </section>
     </main>
 
@@ -1276,7 +1276,7 @@
             <div class="footer-links">
                 <a href="release/privacy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
                 <a href="release/tos.html" target="_blank" rel="noopener noreferrer">Terms of Service</a>
-                <a href="mailto:cranedev@163.com">Contact Us</a>
+                <a href="mailto:cranedev@163.com" target="_blank" rel="noopener noreferrer">Contact Us</a>
             </div>
         </div>
     </footer>
@@ -1319,7 +1319,8 @@
                 showQRCode(game.link, game.name);
                 return;
             }
-            window.location.href = game.link;
+            const storeWindow = window.open(game.link, '_blank', 'noopener,noreferrer');
+            if (storeWindow) storeWindow.opener = null;
         }
 
         function createGameCard(game, platform) {
@@ -1367,7 +1368,7 @@
 
         function renderGames(container, games, platform) {
             container.replaceChildren();
-            games.forEach((game) => {
+            games.slice(0, 12).forEach((game) => {
                 container.appendChild(createGameCard(game, platform));
             });
         }
