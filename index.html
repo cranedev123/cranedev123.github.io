@@ -168,11 +168,36 @@
             overflow: hidden;
             margin-bottom: 28px;
             background:
-                radial-gradient(circle at 14% 16%, rgba(255, 202, 84, 0.25), transparent 32%),
-                linear-gradient(135deg, #fff9ed 0%, #fff3d7 100%);
+                radial-gradient(circle at 88% 52%, rgba(247, 213, 136, 0.22), transparent 31%),
+                linear-gradient(90deg, #fff8ec 0%, #fff8ec 43%, #fff5df 100%);
             border: 1px solid #f6ddba;
             border-radius: var(--radius-xl);
             box-shadow: 0 16px 40px rgba(123, 74, 27, 0.12);
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero::before {
+            background:
+                radial-gradient(circle, rgba(239, 48, 39, 0.1) 0 1.5px, transparent 1.8px) 9% 18% / 22px 22px,
+                radial-gradient(circle, rgba(255, 133, 22, 0.11) 0 1.3px, transparent 1.7px) 86% 17% / 24px 24px,
+                radial-gradient(circle, rgba(23, 41, 79, 0.07) 0 1.2px, transparent 1.6px) 68% 82% / 26px 26px;
+            opacity: 0.62;
+        }
+
+        .hero::after {
+            background:
+                radial-gradient(ellipse at 95% 35%, rgba(110, 175, 49, 0.11) 0 11%, transparent 11.5%),
+                radial-gradient(ellipse at 92% 56%, rgba(110, 175, 49, 0.08) 0 9%, transparent 9.5%),
+                radial-gradient(ellipse at 82% 86%, rgba(255, 133, 22, 0.1) 0 13%, transparent 13.5%);
+            opacity: 0.9;
         }
 
         .hero-content {
@@ -182,7 +207,7 @@
             flex-direction: column;
             align-items: flex-start;
             justify-content: center;
-            padding: 44px 24px 44px 50px;
+            padding: 44px 24px 44px 54px;
         }
 
         .hero-label {
@@ -206,10 +231,10 @@
 
         .hero-title {
             font-family: "Fredoka", "Arial Rounded MT Bold", sans-serif;
-            font-size: clamp(40px, 4.4vw, 58px);
+            font-size: clamp(48px, 5.2vw, 76px);
             font-weight: 700;
             line-height: 0.98;
-            letter-spacing: -1.8px;
+            letter-spacing: -2px;
         }
 
         .hero-title .crane {
@@ -224,314 +249,37 @@
             margin-top: 16px;
             color: #4f3b31;
             font-family: "Fredoka", "Arial Rounded MT Bold", sans-serif;
-            font-size: clamp(20px, 2.2vw, 28px);
+            font-size: clamp(25px, 2.6vw, 38px);
             font-weight: 600;
-            line-height: 1.2;
+            line-height: 1.16;
         }
 
         .hero-description {
-            max-width: 360px;
-            margin-top: 10px;
+            max-width: 330px;
+            margin-top: 12px;
             color: var(--muted);
-            font-size: 15px;
+            font-size: 18px;
+            line-height: 1.45;
         }
 
         .hero-visual {
             min-width: 0;
             position: relative;
+            z-index: 2;
             overflow: hidden;
-            display: grid;
-            place-items: center;
-            background:
-                radial-gradient(circle at center, #fff7e7 0 37%, transparent 37.5%),
-                linear-gradient(145deg, #ffe8bd, #fff8e9);
-            border-radius: 90px 0 0 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: -18px;
+            padding: 0;
         }
 
-        .hero-visual::before,
-        .hero-visual::after {
-            content: "";
-            position: absolute;
-            pointer-events: none;
-            border-radius: 50%;
-        }
-
-        .hero-visual::before {
-            width: 230px;
-            height: 230px;
-            border: 2px dashed rgba(239, 48, 39, 0.14);
-        }
-
-        .hero-visual::after {
-            width: 310px;
-            height: 310px;
-            border: 1px solid rgba(23, 41, 79, 0.08);
-        }
-
-        .cartoon-phone {
-            width: 154px;
-            height: 276px;
-            position: relative;
-            z-index: 2;
-            padding: 9px;
-            background: var(--brand-navy);
-            border: 4px solid #fff;
-            border-radius: 34px;
-            box-shadow: 0 24px 42px rgba(23, 41, 79, 0.24);
-            transform: rotate(7deg);
-        }
-
-        .cartoon-phone::before {
-            content: "";
-            width: 58px;
-            height: 14px;
-            position: absolute;
-            z-index: 3;
-            top: 8px;
-            left: 50%;
-            background: var(--brand-navy);
-            border-radius: 0 0 10px 10px;
-            transform: translateX(-50%);
-        }
-
-        .phone-screen {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-            background:
-                linear-gradient(180deg, #54cef4 0%, #9fe8fa 55%, #d8f5c0 56%, #71c55b 100%);
-            border-radius: 23px;
-        }
-
-        .adventure-sun {
-            width: 32px;
-            height: 32px;
-            position: absolute;
-            top: 33px;
-            right: 17px;
-            background: #ffe463;
-            border-radius: 50%;
-            box-shadow: 0 0 0 7px rgba(255, 229, 99, 0.25);
-        }
-
-        .adventure-cloud {
-            width: 48px;
-            height: 17px;
-            position: absolute;
-            top: 48px;
-            left: 12px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 999px;
-        }
-
-        .adventure-cloud::before,
-        .adventure-cloud::after {
-            content: "";
-            position: absolute;
-            bottom: 4px;
-            background: inherit;
-            border-radius: 50%;
-        }
-
-        .adventure-cloud::before {
-            width: 20px;
-            height: 20px;
-            left: 8px;
-        }
-
-        .adventure-cloud::after {
-            width: 25px;
-            height: 25px;
-            right: 7px;
-        }
-
-        .adventure-hill {
-            width: 110px;
-            height: 70px;
-            position: absolute;
-            right: -28px;
-            bottom: 31px;
-            background: #4aaf63;
-            border-radius: 60% 0 0 0;
-            box-shadow: -61px 18px 0 #79cc58;
-        }
-
-        .adventure-path {
-            width: 38px;
-            height: 90px;
-            position: absolute;
-            left: 46px;
-            bottom: -24px;
-            background: #ffd27c;
-            border-radius: 50% 50% 0 0;
-            transform: rotate(8deg);
-        }
-
-        .adventure-hero {
-            width: 54px;
-            height: 54px;
-            position: absolute;
-            z-index: 2;
-            left: 25px;
-            bottom: 45px;
-            display: grid;
-            place-items: center;
-            color: #603822;
-            background: #ffbd3f;
-            border: 4px solid #ffe57e;
-            border-radius: 50% 50% 43% 43%;
-            box-shadow: 0 7px 0 rgba(40, 92, 71, 0.13);
-            font-size: 17px;
-            font-weight: 900;
-        }
-
-        .adventure-hero::before,
-        .adventure-hero::after {
-            content: "";
-            width: 17px;
-            height: 22px;
-            position: absolute;
-            z-index: -1;
-            top: -9px;
-            background: #ffbd3f;
-            border: 3px solid #ffe57e;
-            border-radius: 80% 20% 50% 50%;
-        }
-
-        .adventure-hero::before {
-            left: 2px;
-            transform: rotate(-28deg);
-        }
-
-        .adventure-hero::after {
-            right: 2px;
-            transform: rotate(28deg);
-        }
-
-        .adventure-star {
-            position: absolute;
-            z-index: 2;
-            color: #fff269;
-            font-size: 19px;
-            text-shadow: 0 2px 4px rgba(64, 82, 153, 0.18);
-        }
-
-        .adventure-star.one { top: 92px; right: 24px; }
-        .adventure-star.two { top: 121px; left: 15px; font-size: 14px; }
-        .adventure-star.three { top: 151px; right: 12px; font-size: 13px; }
-
-        .game-hud {
-            position: absolute;
-            z-index: 3;
-            top: 20px;
-            left: 12px;
-            padding: 4px 8px;
-            color: #fff;
-            background: rgba(23, 41, 79, 0.72);
-            border-radius: 999px;
-            font-size: 8px;
-            font-weight: 900;
-        }
-
-        .mini-phone {
-            width: 98px;
-            height: 174px;
-            position: absolute;
-            z-index: 3;
-            right: 18%;
-            bottom: 28px;
-            padding: 7px;
-            background: #fff;
-            border: 4px solid var(--brand-red);
-            border-radius: 25px;
-            box-shadow: 0 18px 30px rgba(149, 67, 33, 0.18);
-            transform: rotate(-10deg);
-        }
-
-        .mini-phone-screen {
-            width: 100%;
-            height: 100%;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 5px;
-            padding: 31px 8px 18px;
-            background: linear-gradient(180deg, #8ee2f7, #fff0c8);
-            border-radius: 15px;
-        }
-
-        .puzzle-piece {
-            position: relative;
-            display: grid;
-            place-items: center;
-            background: #ffd65e;
-            border: 2px solid rgba(255,255,255,.8);
-            border-radius: 7px;
-            box-shadow: inset 0 -3px 0 rgba(116, 72, 37, 0.1);
-        }
-
-        .puzzle-piece::before {
-            content: "";
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: #513729;
-            box-shadow: 10px 0 #513729;
-            transform: translateX(-5px);
-        }
-
-        .puzzle-piece::after {
-            content: "";
-            width: 9px;
-            height: 4px;
-            position: absolute;
-            bottom: 5px;
-            border-bottom: 2px solid #513729;
-            border-radius: 50%;
-        }
-
-        .puzzle-piece.pink { background: #ff8fa9; }
-        .puzzle-piece.blue { background: #72c9f5; }
-        .puzzle-piece.green { background: #92d464; }
-        .puzzle-piece.purple { background: #b69aee; }
-
-        .puzzle-piece.cat::before {
-            width: 14px;
-            height: 11px;
-            background:
-                radial-gradient(circle at 4px 5px, #543729 0 1.5px, transparent 1.8px),
-                radial-gradient(circle at 10px 5px, #543729 0 1.5px, transparent 1.8px),
-                #fff8ed;
-            border-radius: 5px;
-            box-shadow: none;
-            transform: none;
-        }
-
-        .puzzle-piece.cat::after {
-            width: 5px;
-            height: 3px;
-            bottom: 6px;
-            border-bottom: 1px solid #e47b68;
-        }
-
-        .hero-spark {
-            position: absolute;
-            z-index: 4;
-            color: #f7a921;
-            font-size: 28px;
-            line-height: 1;
-        }
-
-        .hero-spark.one {
-            top: 38px;
-            left: 36%;
-        }
-
-        .hero-spark.two {
-            right: 33%;
-            bottom: 31px;
-            color: var(--brand-red);
-            font-size: 18px;
+        .hero-showcase-image {
+            width: 92%;
+            height: auto;
+            max-height: 88%;
+            object-fit: contain;
+            object-position: center right;
         }
 
         .game-section {
@@ -883,6 +631,10 @@
                 display: none;
             }
 
+            .hero-visual {
+                margin-left: -10px;
+            }
+
         }
 
         @media (max-width: 720px) {
@@ -922,6 +674,17 @@
                 border-radius: 20px;
             }
 
+            .hero::before {
+                background:
+                    radial-gradient(circle, rgba(239, 48, 39, 0.09) 0 1.3px, transparent 1.7px) 12% 12% / 24px 24px,
+                    radial-gradient(circle, rgba(255, 133, 22, 0.09) 0 1.2px, transparent 1.6px) 82% 62% / 26px 26px;
+                opacity: 0.48;
+            }
+
+            .hero::after {
+                opacity: 0.55;
+            }
+
             .hero-content {
                 align-items: center;
                 padding: 32px 24px 28px;
@@ -948,126 +711,16 @@
             }
 
             .hero-visual {
-                height: 210px;
+                height: 225px;
+                margin-left: 0;
+                padding: 0;
                 border-radius: 42px 42px 0 0;
             }
 
-            .hero-visual::before {
-                width: 175px;
-                height: 175px;
-            }
-
-            .hero-visual::after {
-                width: 240px;
-                height: 240px;
-            }
-
-            .cartoon-phone {
-                width: 108px;
-                height: 192px;
-                padding: 6px;
-                border-width: 3px;
-                border-radius: 26px;
-            }
-
-            .cartoon-phone::before {
-                width: 42px;
-                height: 10px;
-                top: 6px;
-            }
-
-            .phone-screen {
-                border-radius: 18px;
-            }
-
-            .adventure-sun {
-                width: 23px;
-                height: 23px;
-                top: 25px;
-                right: 12px;
-                box-shadow: 0 0 0 5px rgba(255, 229, 99, 0.25);
-            }
-
-            .adventure-cloud {
-                width: 34px;
-                height: 12px;
-                top: 36px;
-                left: 8px;
-            }
-
-            .adventure-cloud::before {
-                width: 14px;
-                height: 14px;
-                left: 5px;
-            }
-
-            .adventure-cloud::after {
-                width: 18px;
-                height: 18px;
-                right: 4px;
-            }
-
-            .adventure-hill {
-                width: 78px;
-                height: 50px;
-                right: -20px;
-                bottom: 21px;
-                box-shadow: -43px 12px 0 #79cc58;
-            }
-
-            .adventure-path {
-                width: 26px;
-                height: 65px;
-                left: 33px;
-            }
-
-            .adventure-hero {
-                width: 38px;
-                height: 38px;
-                left: 17px;
-                bottom: 31px;
-                border-width: 3px;
-                font-size: 12px;
-            }
-
-            .adventure-hero::before,
-            .adventure-hero::after {
-                width: 12px;
-                height: 16px;
-                top: -7px;
-                border-width: 2px;
-            }
-
-            .adventure-star.one { top: 65px; right: 16px; font-size: 13px; }
-            .adventure-star.two { top: 87px; left: 10px; font-size: 10px; }
-            .adventure-star.three { top: 106px; right: 8px; font-size: 9px; }
-
-            .game-hud {
-                top: 14px;
-                left: 8px;
-                padding: 3px 5px;
-                font-size: 6px;
-            }
-
-            .mini-phone {
-                width: 69px;
-                height: 122px;
-                right: 15%;
-                bottom: 17px;
-                padding: 4px;
-                border-width: 3px;
-                border-radius: 19px;
-            }
-
-            .mini-phone-screen {
-                gap: 3px;
-                padding: 22px 5px 12px;
-                border-radius: 12px;
-            }
-
-            .mini-phone-screen span {
-                border-radius: 4px;
-                font-size: 8px;
+            .hero-showcase-image {
+                width: 96%;
+                max-height: 92%;
+                object-position: center;
             }
 
             .game-section {
@@ -1165,42 +818,15 @@
     </header>
 
     <main class="shell" id="home">
-        <section class="hero" aria-label="CraneStudio - Make beautiful games">
+        <section class="hero" aria-label="CraneStudio - Casual game studio">
             <div class="hero-content">
                 <div class="hero-label">CASUAL GAME STUDIO</div>
                 <h1 class="hero-title"><span class="crane">Crane</span><span class="studio">Studio</span></h1>
-                <p class="hero-tagline">Make beautiful games.</p>
-                <p class="hero-description">Playful mobile experiences, thoughtfully made for everyday moments.</p>
+                <p class="hero-tagline">Playful games,<br>polished for every moment.</p>
+                <p class="hero-description">Mobile, watch, and puzzle experiences made with care.</p>
             </div>
             <div class="hero-visual" aria-hidden="true">
-                <span class="hero-spark one">✦</span>
-                <span class="hero-spark two">✦</span>
-                <div class="cartoon-phone">
-                    <div class="phone-screen">
-                        <span class="game-hud">★ 120</span>
-                        <span class="adventure-sun"></span>
-                        <span class="adventure-cloud"></span>
-                        <span class="adventure-hill"></span>
-                        <span class="adventure-path"></span>
-                        <span class="adventure-star one">★</span>
-                        <span class="adventure-star two">★</span>
-                        <span class="adventure-star three">★</span>
-                        <span class="adventure-hero">•ᴗ•</span>
-                    </div>
-                </div>
-                <div class="mini-phone">
-                    <div class="mini-phone-screen">
-                        <span class="puzzle-piece cat"></span>
-                        <span class="puzzle-piece pink"></span>
-                        <span class="puzzle-piece blue"></span>
-                        <span class="puzzle-piece green"></span>
-                        <span class="puzzle-piece cat"></span>
-                        <span class="puzzle-piece purple"></span>
-                        <span class="puzzle-piece blue"></span>
-                        <span class="puzzle-piece pink"></span>
-                        <span class="puzzle-piece green"></span>
-                    </div>
-                </div>
+                <img class="hero-showcase-image" src="static/image-removebg-preview.png" alt="">
             </div>
         </section>
 
