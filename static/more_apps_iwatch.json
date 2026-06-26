@@ -1,0 +1,53 @@
+{
+    "appList": [
+      {
+        "name": "Merge Sun Master for watch",
+        "name_zh": "合成大太阳",
+        "package": "com.crane.MergeSunWatch",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/cd/3f/b2/cd3fb26c-9f5f-7171-50ea-c4d8fcdbefa5/AppIcon-1x_U007ewatch-0-1-85-220-0.png/400x400ic-75.webp",
+        "link": "https://apps.apple.com/app/apple-store/id6743445326?pt=117781537&ct=crane&mt=8"
+      },
+      {
+        "name": "Wandering Planet for watch",
+        "name_zh": "流浪星球手表版",
+        "package": "com.crane.explore.planets",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a2/fe/38/a2fe3855-7f97-5ef2-d813-e27ebe03bf8e/AppIcon-1x_U007ewatch-0-1-85-220-0.png/400x400ic-75.webp",
+        "link": "https://apps.apple.com/app/apple-store/id6745691386?pt=117781537&ct=crane&mt=8"
+      },
+      {
+        "name": "Merge Planets 2048 for watch",
+        "name_zh": "2048星球版 for watch",
+        "package": "com.crane.mergenumberplants.watch",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/db/a9/c9/dba9c938-2ae9-da71-2684-993eba57cffb/AppIcon-1x_U007ewatch-0-1-85-220-0.png/400x400ic-75.webp",
+        "link": "https://apps.apple.com/app/apple-store/id6745313580?pt=117781537&ct=crane&mt=8"
+      },
+      {
+        "name": "MineSweeper Blast",
+        "name_zh": "扫雷大冒险 for watch",
+        "package": "com.crane.minesweeper.watch",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/93/81/cf/9381cffa-b5a1-7ca7-bf2b-1fa97d9cac29/AppIcon-1x_U007ewatch-0-1-85-220-0.png/400x400ic-75.webp",
+        "link": "https://apps.apple.com/app/apple-store/id6744388259?pt=117781537&ct=crane&mt=8"
+      },
+      {
+        "name": "Crazy Sudoku for watch",
+        "name_zh": "癫疯数独手表版",
+        "package": "com.crane.sudoku.watch",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/8a/04/aa/8a04aab1-26c5-5a57-fa94-7385e6cfc143/AppIcon-1x_U007ewatch-0-1-85-220-0.png/400x400ic-75.webp",
+        "link": "https://itunes.apple.com/app/id6746702869"
+      },
+      {
+        "name": "Meow Number Puzzle for Watch",
+        "name_zh": "喵喵数字拼图",
+        "package": "com.crane.puzzle.sliding",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b2/14/40/b21440e1-1693-e68d-98ac-7e3eb16c42c6/AppIcon-1x_U007ewatch-0-1-85-220-0.png/400x400ic-75.webp",
+        "link": "https://itunes.apple.com/app/id6744612941"
+      },
+      {
+        "name": "Touch Number puzzle for watch",
+        "name_zh": "按数字手表版",
+        "package": "com.crane.touchnumber.watch",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/41/c5/d8/41c5d89c-cc41-f4d4-e725-f510d9ec8e40/AppIcon-1x_U007ewatch-0-1-85-220-0.png/400x400ic-75.webp",
+        "link": "https://itunes.apple.com/app/id6745123720"
+      }
+    ]
+  }
