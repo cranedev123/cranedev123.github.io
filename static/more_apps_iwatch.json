@@ -1,6 +1,13 @@
 {
     "appList": [
       {
+        "name": "Tiny Train Tracks: Watch Game",
+        "name_zh": "疯狂小火车 for watch",
+        "package": "cn.crane.game.tinytrain",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/f8/31/59/f831598f-d7f9-af7b-8200-dc866122995e/Placeholder.mill/400x400bb-75.webp",
+        "link": "https://apps.apple.com/app/apple-store/id6783249633?pt=117781537&ct=crane&mt=8"
+      },
+      {
         "name": "Merge Sun Master for watch",
         "name_zh": "合成大太阳",
         "package": "com.crane.MergeSunWatch",
