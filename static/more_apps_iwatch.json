@@ -1,6 +1,13 @@
 {
     "appList": [
       {
+        "name": "Bouncy Brick Breaker for Watch",
+        "name_zh": "球球打砖块",
+        "package": "cn.crane.game.brickbreaker",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/cd/ae/22/cdae22f8-8d94-fc56-c9dc-98d192e20654/AppIcon-0-0-1x_U007ewatch-0-1-85-220.png/400x400ic-75.webp",
+        "link": "https://apps.apple.com/app/apple-store/id6790363960?pt=117781537&ct=crane&mt=8"
+      },
+      {
         "name": "Tiny Train Tracks: Watch Game",
         "name_zh": "疯狂小火车 for watch",
         "package": "cn.crane.game.tinytrain",
