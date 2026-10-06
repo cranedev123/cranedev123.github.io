@@ -1,6 +1,13 @@
 {
   "appList": [
     {
+      "name": "Rolling Ball Maze: Tilt Puzzle",
+      "name_zh": "滚动弹珠迷宫",
+      "package": "cn.crane.gravity.maze",
+      "icon": "https://play-lh.googleusercontent.com/SdMnHanW-8XxLpN6SR5NyvtaNzJPCC_DgLyjmRovbS1t-objWFCa7PS9MC_JREybXUzX6lyJ61VSiBu_TTU8=w240-h480-rw",
+      "link": "https://play.google.com/store/apps/details?id=cn.crane.gravity.maze"
+    },
+    {
       "name": "Merge a Sun",
       "name_zh": "合成大太阳",
       "package": "cn.crane.unity.mergebubble",
