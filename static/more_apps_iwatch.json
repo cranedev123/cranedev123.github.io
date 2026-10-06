@@ -1,6 +1,13 @@
 {
     "appList": [
       {
+        "name": "Sand Blocks: Color Flow Puzzle for Watch",
+        "name_zh": "彩沙方块手表版",
+        "package": "cn.crane.fallingsand",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/00/31/8f/00318f7d-54d2-5e00-6cee-72549ae2d1ad/AppIcon-0-0-1x_U007ewatch-0-1-85-220.png/400x400ic-75.webp",
+        "link": "https://apps.apple.com/app/apple-store/id6816871900?pt=117781537&ct=crane&mt=8"
+      },
+      {
         "name": "Bouncy Brick Breaker for Watch",
         "name_zh": "球球打砖块",
         "package": "cn.crane.game.brickbreaker",
