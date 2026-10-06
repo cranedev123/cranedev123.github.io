@@ -1018,12 +1018,38 @@
             return card;
         }
 
-        function renderGames(container, games, platform) {
-            container.replaceChildren();
-            games.slice(0, 12).forEach((game) => {
-                container.appendChild(createGameCard(game, platform));
+        const TARGET_GRID_COUNT = 12;
+
+        function applyGridRowLimit(container) {
+            const cards = Array.from(container.children)
+                .filter((el) => el.classList.contains('game-card'));
+            if (!cards.length) return;
+            const columns = getComputedStyle(container)
+                .gridTemplateColumns.split(' ')
+                .filter(Boolean).length;
+            if (!columns) return;
+            const rows = Math.ceil(TARGET_GRID_COUNT / columns);
+            const limit = Math.min(cards.length, columns * rows);
+            cards.forEach((card, index) => {
+                card.style.display = index < limit ? '' : 'none';
             });
         }
+
+        function renderGames(container, games, platform) {
+            container.replaceChildren();
+            games.forEach((game) => {
+                container.appendChild(createGameCard(game, platform));
+            });
+            applyGridRowLimit(container);
+        }
+
+        let gridLimitTimer = null;
+        window.addEventListener('resize', () => {
+            window.clearTimeout(gridLimitTimer);
+            gridLimitTimer = window.setTimeout(() => {
+                document.querySelectorAll('.games-grid').forEach(applyGridRowLimit);
+            }, 150);
+        });
 
         async function loadGames(url, containerId, platform) {
             const container = document.getElementById(containerId);
