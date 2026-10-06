@@ -611,6 +611,30 @@
             font-size: 13px;
         }
 
+        .qr-direct-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 42px;
+            margin-top: 18px;
+            padding: 0 22px;
+            border: 1.5px solid #ffb665;
+            border-radius: 999px;
+            color: var(--orange-dark);
+            background: #fff;
+            font-weight: 800;
+            font-size: 13px;
+            transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .qr-direct-link:hover {
+            color: #fff;
+            background: var(--orange);
+            border-color: var(--orange);
+            transform: translateY(-2px);
+        }
+
         @media (max-width: 1100px) {
             .nav-links {
                 gap: 18px;
@@ -914,6 +938,7 @@
             <h3 id="qr-title">Open in the App Store</h3>
             <p id="qr-game-name"></p>
             <p id="qr-hint">Scan this QR code with your phone.</p>
+            <a id="qr-direct-link" class="qr-direct-link" href="#" target="_blank" rel="noopener noreferrer">Open the store page directly</a>
         </div>
     </div>
 
@@ -933,6 +958,7 @@
         const qrCode = document.getElementById('qr-code');
         const qrGameName = document.getElementById('qr-game-name');
         const qrClose = document.getElementById('qr-close');
+        const qrDirectLink = document.getElementById('qr-direct-link');
         let lastFocusedElement = null;
 
         function isMobileDevice() {
@@ -1033,6 +1059,7 @@
             lastFocusedElement = document.activeElement;
             qrCode.replaceChildren();
             qrGameName.textContent = gameName;
+            qrDirectLink.href = url;
 
             if (typeof window.QRCode === 'function') {
                 try {
