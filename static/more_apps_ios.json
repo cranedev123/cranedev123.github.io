@@ -1,6 +1,13 @@
 {
     "appList": [
       {
+        "name": "Rolling Ball Maze: Tilt Puzzle",
+        "name_zh": "滚球迷宫游戏",
+        "package": "cn.crane.gravity.maze",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/d1/9e/23/d19e23cf-bad8-44f4-5ab3-071615824b69/AppIcon-0-0-1x_U007epad-0-1-85-220.png/246x0w.webp",
+        "link": "https://apps.apple.com/app/apple-store/id6813141852?pt=117781537&ct=crane&mt=8"
+      },
+      {
         "name": "Merge a Sun",
         "name_zh": "合成大太阳",
         "package": "cn.crane.unity.mergebubble",
