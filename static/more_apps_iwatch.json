@@ -1,6 +1,13 @@
 {
     "appList": [
       {
+        "name": "Trap the Pig: Watch Puzzle",
+        "name_zh": "抓住那只猪手表版",
+        "package": "cn.crane.game.trappig",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/90/7f/0a/907f0af9-0fb6-8ef1-9b45-5c74c3f84061/AppIcon-0-0-1x_U007ewatch-0-1-85-220.png/400x400ic-75.webp",
+        "link": "https://apps.apple.com/app/apple-store/id6821770944?pt=117781537&ct=crane&mt=8"
+      },
+{
         "name": "Rolling Ball Maze for Watch",
         "name_zh": "滚球迷宫手表版",
         "package": "cn.crane.gravity.maze",
