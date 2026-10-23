@@ -1,6 +1,13 @@
 {
     "appList": [
       {
+        "name": "Sliding Cat: Maze Logic Puzzle",
+        "name_zh": "喵喵点灯",
+        "package": "cn.crane.lanterntail",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/70/8f/cf/708fcfee-d5b8-5749-63ff-5221fb1e5dfe/AppIcon-0-0-1x_U007ewatch-0-1-85-220.png/400x400ic-75.webp",
+        "link": "https://apps.apple.com/app/apple-store/id6822198432?pt=117781537&ct=crane&mt=8"
+      },
+      {
         "name": "Trap the Pig: Watch Puzzle",
         "name_zh": "抓住那只猪手表版",
         "package": "cn.crane.game.trappig",
