@@ -1,6 +1,20 @@
 {
   "appList": [
     {
+      "name": "Sliding Cat: Lantern Puzzle",
+      "name_zh": "滑动猫",
+      "package": "cn.crane.slidingcat.android",
+      "icon": "https://play-lh.googleusercontent.com/dSMgg49ssB-GGmNNulri4HDowA0WBnAlApkpgW6skNHBA_UfmoKilPuUBlO_vLzWp4y3FDpxnhfzElaffhtT=w240-h480-rw",
+      "link": "https://play.google.com/store/apps/details?id=cn.crane.slidingcat.android"
+    },
+    {
+      "name": "Curvy Snake: Island Adventure",
+      "name_zh": "弯弯小蛇：单指贪吃蛇闯关",
+      "package": "com.cranegames.curvysnake",
+      "icon": "https://play-lh.googleusercontent.com/IrDJwERGuDlM37uHl8VYnpRbL86Ta43lnG4Oi9pNmlWSAQ7IqaAa21Umqen-spW7tmG_eYEi5JtO8TDK9L-KniM=w240-h480-rw",
+      "link": "https://play.google.com/store/apps/details?id=com.cranegames.curvysnake"
+    },
+    {
       "name": "Rolling Ball Maze: Tilt Puzzle",
       "name_zh": "滚动弹珠迷宫",
       "package": "cn.crane.gravity.maze",
