@@ -1,6 +1,13 @@
 {
     "appList": [
       {
+        "name": "Sliding Cat Garden: Maze Logic",
+        "name_zh": "喵喵点灯花园",
+        "package": "cn.crane.slidingcat.forphone",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/1b/75/1a/1b751aed-6c55-a7cf-2730-3c9586e3eb7b/AppIcon-0-0-1x_U007epad-0-1-85-220.png/246x0w.webp",
+        "link": "https://apps.apple.com/app/apple-store/id6823406127?pt=117781537&ct=crane&mt=8"
+      },
+      {
         "name": "Rolling Ball Maze: Tilt Puzzle",
         "name_zh": "滚球迷宫游戏",
         "package": "cn.crane.gravity.maze",
