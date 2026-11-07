@@ -1,6 +1,13 @@
 {
     "appList": [
       {
+        "name": "Wukong Bridge for Watch",
+        "name_zh": "悟空搭桥",
+        "package": "cn.crane.game.wukongbridge",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/5a/02/96/5a02962b-b03d-cda6-9709-ebe187d6ff96/AppIcon-0-0-1x_U007ewatch-0-1-85-220.png/400x400ic-75.webp",
+        "link": "https://apps.apple.com/app/apple-store/id6824414286?pt=117781537&ct=crane&mt=8"
+      },
+      {
         "name": "Sliding Cat: Maze Logic Puzzle",
         "name_zh": "喵喵点灯",
         "package": "cn.crane.lanterntail",
