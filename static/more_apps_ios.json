@@ -1,6 +1,13 @@
 {
     "appList": [
       {
+        "name": "Snake Turns: Island Adventure",
+        "name_zh": "贪吃蛇环岛冒险",
+        "package": "cn.crane.game.snakeleft",
+        "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/4d/30/44/4d30440d-7439-5a10-0b27-dfcc9e7f62f5/AppIcon-0-0-1x_U007epad-0-1-85-220.png/246x0w.webp",
+        "link": "https://apps.apple.com/app/apple-store/id6829594977?pt=117781537&ct=crane&mt=8"
+      },
+      {
         "name": "Sliding Cat Garden: Maze Logic",
         "name_zh": "喵喵点灯花园",
         "package": "cn.crane.slidingcat.forphone",
